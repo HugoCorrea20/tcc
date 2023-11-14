@@ -1160,7 +1160,7 @@ GameObject:
   - component: {fileID: 1345416478}
   - component: {fileID: 1345416477}
   m_Layer: 0
-  m_Name: Capsule
+  m_Name: inimigo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

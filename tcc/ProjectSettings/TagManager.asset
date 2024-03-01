@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Chao
+  - Bala
+  - Enemy
   layers:
   - Default
   - TransparentFX

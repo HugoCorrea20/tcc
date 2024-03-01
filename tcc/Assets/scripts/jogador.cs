@@ -8,9 +8,11 @@ public class jogador : MonoBehaviour
     public float jumpForce = 10f; // Força do pulo
     public GameObject bulletPrefab; // Prefab da bala
     public float velocidade_tiro = 10f;
-
+    public Transform bulletSpawnPointRight; // Ponto de spawn da bala quando o jogador está indo para a direita
+    public Transform bulletSpawnPointLeft; // Ponto de spawn da bala quando o jogador está indo para a esquerda
     private Rigidbody2D rb; // Referência ao componente Rigidbody2D
     private bool isGrounded; // Verifica se o jogador está no chão
+
 
     void Start()
     {
@@ -46,15 +48,23 @@ public class jogador : MonoBehaviour
     // Função para atirar
     void Shoot(float direction)
     {
-        // Instancia o objeto de bala na posição do jogador
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        // Ajusta a posição de spawn do tiro de acordo com a direção do jogador
+        Vector3 spawnPosition;
+
+        if (direction > 0) // Jogador está indo para a direita
+        {
+            spawnPosition = bulletSpawnPointRight.position;
+        }
+        else // Jogador está indo para a esquerda
+        {
+            spawnPosition = bulletSpawnPointLeft.position;
+        }
+
+        // Instancia o objeto de bala na posição de spawn determinada
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
 
         // Determina a direção do tiro com base na direção do movimento do jogador
-        Vector2 shootDirection = Vector2.right; // Por padrão, o tiro vai para a direita
-        if (direction < 0) // Se o jogador estiver se movendo para a esquerda
-        {
-            shootDirection = Vector2.left; // Muda a direção do tiro para a esquerda
-        }
+        Vector2 shootDirection = direction > 0 ? Vector2.right : Vector2.left;
 
         // Aplica uma força na direção determinada à bala
         bullet.GetComponent<Rigidbody2D>().AddForce(shootDirection * velocidade_tiro, ForceMode2D.Impulse);
@@ -67,6 +77,7 @@ public class jogador : MonoBehaviour
         {
             isGrounded = true;
         }
+
     }
 
     // Verifica se o jogador não está mais colidindo com o chão

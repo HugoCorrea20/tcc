@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/cena2.unity
     guid: 7299db4934a82c14abf527a7a7a3b207
+  - enabled: 1
+    path: Assets/Scenes/loading.unity
+    guid: bba5e0dd459412649b2cd5cdfa1fcdfd
   m_configObjects: {}

@@ -20,6 +20,7 @@ public class inimigo : MonoBehaviour
         }
     }
 
+
     void Die()
     {
         Destroy(gameObject);

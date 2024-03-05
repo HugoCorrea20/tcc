@@ -15,6 +15,7 @@ public class SceneLoader : MonoBehaviour
     public Text textporcetagem;
     [Header("Imagem")]
     public Image imgparaMudar;
+    public int cenas;
     public Sprite[] imagens;
 
     public void Start()
@@ -42,7 +43,7 @@ public class SceneLoader : MonoBehaviour
     {
         yield return null;
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(0);
 
         while(operation.isDone) 
         {
@@ -61,7 +62,7 @@ public class SceneLoader : MonoBehaviour
     {
         yield return null;
 
-        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(cenas);
         operation.allowSceneActivation = false;
         float progresso = 0.0f;
         float progresso2 = 0.0f;

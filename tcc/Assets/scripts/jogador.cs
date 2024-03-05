@@ -13,6 +13,7 @@ public class jogador : MonoBehaviour
     private Rigidbody2D rb; 
     private bool isGrounded;
     private float lastDirection = 1f;
+    public float attackRange = 1.5f; // Ajuste a distância de ataque conforme necessário
 
     void Start()
     {
@@ -47,8 +48,24 @@ public class jogador : MonoBehaviour
         {
             Shoot(); 
         }
+        if (Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse para ataque de perto
+        {
+            Attack();
+        }
     }
+    void Attack()
+    {
+        Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
 
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Inimigo"))
+            {
+                collider.GetComponent<inimigo>().TakeDamage(10);
+            }
+        }
+    }
 
     void Shoot()
     {

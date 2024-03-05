@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 1253533984}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Enemy
+  m_TagString: Inimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1226,6 +1226,7 @@ MonoBehaviour:
   velocidade_tiro: 10
   bulletSpawnPointRight: {fileID: 2112579992}
   bulletSpawnPointLeft: {fileID: 1517956564}
+  attackRange: 1.5
 --- !u!50 &1876010672
 Rigidbody2D:
   serializedVersion: 4

@@ -6,7 +6,9 @@ TagManager:
   tags:
   - Chao
   - Bala
-  - Enemy
+  - Inimigo
+  - LimiteMapa
+  - LimiteDoMapa
   layers:
   - Default
   - TransparentFX

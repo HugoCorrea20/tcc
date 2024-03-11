@@ -35,12 +35,6 @@ public class MovimentoNavio : MonoBehaviour
             bala.GetComponent<Rigidbody2D>().velocity = transform.right * velocidadeBala;
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("LimiteDoMapa"))
-        {
-            Destroy(gameObject);
-        }
-    }
+    
 
 }

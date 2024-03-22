@@ -6,15 +6,28 @@ public class MovimentoNavio : MonoBehaviour
     public GameObject balaPrefab; // Prefab da bala
     public Transform pontoDeSpawn; // Ponto de spawn da bala
     public float velocidadeBala = 10f; // Velocidade da bala
-    
 
+    public float tempoUltimoTiro;
+    public  bool primeiroTiroDisparado = false;
+
+    void Start()
+    {
+        tempoUltimoTiro = Time.time;
+    }
 
     void Update()
     {
         MovimentarNavio();
-        AtirarBala();
-        
 
+        if (!primeiroTiroDisparado || Time.time - tempoUltimoTiro >= 3f)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                AtirarBala();
+                tempoUltimoTiro = Time.time;
+                primeiroTiroDisparado = true;
+            }
+        }
     }
 
     void MovimentarNavio()
@@ -26,15 +39,7 @@ public class MovimentoNavio : MonoBehaviour
 
     void AtirarBala()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-           
-            GameObject bala = Instantiate(balaPrefab, pontoDeSpawn.position, pontoDeSpawn.rotation);
-
-         
-            bala.GetComponent<Rigidbody2D>().velocity = transform.right * velocidadeBala;
-        }
+        GameObject bala = Instantiate(balaPrefab, pontoDeSpawn.position, pontoDeSpawn.rotation);
+        bala.GetComponent<Rigidbody2D>().velocity = transform.right * velocidadeBala;
     }
-    
-
 }

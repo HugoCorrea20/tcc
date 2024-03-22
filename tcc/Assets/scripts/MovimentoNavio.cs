@@ -7,8 +7,8 @@ public class MovimentoNavio : MonoBehaviour
     public Transform pontoDeSpawn; // Ponto de spawn da bala
     public float velocidadeBala = 10f; // Velocidade da bala
 
-    public float tempoUltimoTiro;
-    public  bool primeiroTiroDisparado = false;
+    private float tempoUltimoTiro;
+    private  bool primeiroTiroDisparado = false;
 
     void Start()
     {

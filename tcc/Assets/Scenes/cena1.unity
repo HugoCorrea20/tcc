@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d687587cb1efe8418aa82527c5e1c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proximaCena: 'loading 1 '
+  proximaCena: loading 1
   tempoDeTransicao: 2
   imagemTransicao: {fileID: 1112492321}
 --- !u!61 &206727452

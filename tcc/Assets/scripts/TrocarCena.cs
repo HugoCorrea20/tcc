@@ -16,6 +16,8 @@ public class TrocarCena : MonoBehaviour
     public GameObject começarbtn;
     public GameObject proximofalar1btn;
     public GameObject proximofalar2btn;
+    public GameObject tutirialJason;
+    public GameObject tutirialnavio;
    
 
     public void TrocarParaCena()
@@ -59,6 +61,21 @@ public class TrocarCena : MonoBehaviour
     texto2 .SetActive(false);
     começarbtn .SetActive(true);
     proximofalar2btn .SetActive(false);
+    }
+    public void tutorialjason()
+    {
+        menuprincipal.SetActive(false);
+        tutirialJason.SetActive(true);
+    }
+    public void tutorialnavio()
+    {
+        tutirialJason.SetActive(false);
+        tutirialnavio.SetActive(true);
+    }
+    public void sairtutorial()
+    {
+        tutirialnavio.SetActive(false);
+        menuprincipal.SetActive(true);
     }
 
 }

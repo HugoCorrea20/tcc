@@ -273,7 +273,7 @@ MonoBehaviour:
   Slloading: {fileID: 1816217953}
   textporcetagem: {fileID: 1939487789}
   imgparaMudar: {fileID: 32778042}
-  cenas: 0
+  cenas: 1
   imagens: []
 --- !u!1 &463918200
 GameObject:

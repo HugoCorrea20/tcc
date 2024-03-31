@@ -171,9 +171,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11b6e46e25f3046af462b4280f74f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limiteHorizontal: 10
-  limiteVertical: 50
-  limiteEsquerdo: 20
-  limiteDireito: 20
-  limiteInferior: 50
-  limiteSuperior: 50
+  limiteDeX: 100

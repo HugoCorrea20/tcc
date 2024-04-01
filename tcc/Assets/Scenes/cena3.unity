@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 754641527}
   - component: {fileID: 754641526}
   m_Layer: 6
-  m_Name: limitedacamera
+  m_Name: limetedacamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,7 +704,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022513084}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.009802558, y: 0.0011398527, z: 0.000011174017, w: 0.9999513}
+  m_LocalRotation: {x: -0.009802558, y: 0.0011398871, z: 0.000011174355, w: 0.9999513}
   m_LocalPosition: {x: -20.97, y: 4.8, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d687587cb1efe8418aa82527c5e1c51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  proximaCena: loading 2
+  proximaCena: 
   tempoDeTransicao: 1
   imagemTransicao: {fileID: 2092941928}
 --- !u!61 &1138912818
@@ -1223,7 +1223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325579780}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.009802558, y: 0.0011398527, z: 0.000011174017, w: 0.9999513}
+  m_LocalRotation: {x: -0.009802558, y: 0.0011398871, z: 0.000011174355, w: 0.9999513}
   m_LocalPosition: {x: -20.992798, y: 4.0739207, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -8,7 +8,7 @@ public class MovimentoNavio : MonoBehaviour
     public float velocidadeBala = 10f; // Velocidade da bala
 
     private float tempoUltimoTiro;
-    private  bool primeiroTiroDisparado = false;
+    private bool primeiroTiroDisparado = false;
 
     void Start()
     {
@@ -17,15 +17,18 @@ public class MovimentoNavio : MonoBehaviour
 
     void Update()
     {
-        MovimentarNavio();
-
-        if (!primeiroTiroDisparado || Time.time - tempoUltimoTiro >= 3f)
+        if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado
         {
-            if (Input.GetMouseButtonDown(0))
+            MovimentarNavio();
+
+            if (!primeiroTiroDisparado || Time.time - tempoUltimoTiro >= 3f)
             {
-                AtirarBala();
-                tempoUltimoTiro = Time.time;
-                primeiroTiroDisparado = true;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    AtirarBala();
+                    tempoUltimoTiro = Time.time;
+                    primeiroTiroDisparado = true;
+                }
             }
         }
     }

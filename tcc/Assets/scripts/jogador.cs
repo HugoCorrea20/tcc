@@ -16,6 +16,10 @@ public class jogador : MonoBehaviour
     public float attackRange = 1.5f; // Ajuste a distância de ataque conforme necessário
     private float lastShootTime;
     public float shootCooldown = 5f; // Tempo de espera entre os tiros
+    public float pickupRange = 1.5f; // Ajuste a distância de pegar o item conforme necessário
+    public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
+    private bool itemPegado = false;
+
 
     void Start()
     {
@@ -25,65 +29,96 @@ public class jogador : MonoBehaviour
 
     void Update()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-
-        Vector2 movement = new Vector2(moveHorizontal, 0f);
-
-        rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
-
-        if (moveHorizontal != 0)
+        if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado
         {
-            lastDirection = Mathf.Sign(moveHorizontal);
-        }
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isGrounded = false;
-        }
+            float moveHorizontal = Input.GetAxis("Horizontal");
 
-        if (Input.GetMouseButtonDown(1) && Time.time - lastShootTime > shootCooldown) // Verifica se o tempo decorrido é maior que o tempo de espera
-        {
-            Shoot();
-            lastShootTime = Time.time; // Atualiza o tempo do último tiro
-        }
-        if (Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse para ataque de perto
-        {
-            Attack();
+            Vector2 movement = new Vector2(moveHorizontal, 0f);
+
+            rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
+
+            if (moveHorizontal != 0)
+            {
+                lastDirection = Mathf.Sign(moveHorizontal);
+            }
+            if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+            }
+
+            if (Input.GetMouseButtonDown(1) && Time.time - lastShootTime > shootCooldown) // Verifica se o tempo decorrido é maior que o tempo de espera
+            {
+                Shoot();
+                lastShootTime = Time.time; // Atualiza o tempo do último tiro
+            }
+            if (Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse para ataque de perto
+            {
+                Attack();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                PickupItem();
+            }
         }
     }
-
-    void Attack()
+    void PickupItem()
     {
-        Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, pickupRange);
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Inimigo"))
+            if (collider.CompareTag("Item"))
             {
-                collider.GetComponent<inimigo>().TakeDamage(10);
+                // Pegar o item
+                currentItem = collider.gameObject;
+                // Desative o item (ou destrua-o)
+                currentItem.SetActive(false);
+                // Execute qualquer lógica adicional aqui, se necessário
+                Debug.Log("Item pegado!");
+                // Sair do loop após pegar um item
+                break;
+            }
+        }
+    }
+    void Attack()
+    {
+        if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado antes de permitir o ataque
+        {
+            Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
+
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("Inimigo"))
+                {
+                    collider.GetComponent<inimigo>().TakeDamage(10);
+                }
             }
         }
     }
 
     void Shoot()
     {
-        Vector3 spawnPosition;
-
-        if (lastDirection > 0)
+        if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado antes de permitir o tiro
         {
-            spawnPosition = bulletSpawnPointRight.position;
+            Vector3 spawnPosition;
+
+            if (lastDirection > 0)
+            {
+                spawnPosition = bulletSpawnPointRight.position;
+            }
+            else
+            {
+                spawnPosition = bulletSpawnPointLeft.position;
+            }
+
+            GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+
+            Vector2 shootDirection = lastDirection > 0 ? Vector2.right : Vector2.left;
+
+            bullet.GetComponent<Rigidbody2D>().AddForce(shootDirection * velocidade_tiro, ForceMode2D.Impulse);
         }
-        else
-        {
-            spawnPosition = bulletSpawnPointLeft.position;
-        }
-
-        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
-
-        Vector2 shootDirection = lastDirection > 0 ? Vector2.right : Vector2.left;
-
-        bullet.GetComponent<Rigidbody2D>().AddForce(shootDirection * velocidade_tiro, ForceMode2D.Impulse);
     }
 
     void OnCollisionEnter2D(Collision2D other)

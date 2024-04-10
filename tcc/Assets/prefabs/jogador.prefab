@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 5829050699758807886}
   m_Layer: 7
   m_Name: jogador
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 21
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 0.104001045, g: 0, b: 1, a: 1}
   m_FlipX: 0
@@ -202,6 +202,8 @@ MonoBehaviour:
   bulletSpawnPointLeft: {fileID: 4322773026620321850}
   attackRange: 1.5
   shootCooldown: 3
+  pickupRange: 1.5
+  currentItem: {fileID: 0}
 --- !u!1 &9138979688782814378
 GameObject:
   m_ObjectHideFlags: 0

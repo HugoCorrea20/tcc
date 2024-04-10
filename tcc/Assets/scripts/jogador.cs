@@ -70,17 +70,23 @@ public class jogador : MonoBehaviour
         {
             if (collider.CompareTag("Item"))
             {
-                // Pegar o item
-                currentItem = collider.gameObject;
-                // Desative o item (ou destrua-o)
-                currentItem.SetActive(false);
-                // Execute qualquer lógica adicional aqui, se necessário
-                Debug.Log("Item pegado!");
-                // Sair do loop após pegar um item
-                break;
+                float distanceToItem = Vector2.Distance(transform.position, collider.transform.position);
+
+                if (distanceToItem <= pickupRange)
+                {
+                    // Pegar o item
+                    currentItem = collider.gameObject;
+                    // Desative o item (ou destrua-o)
+                    currentItem.SetActive(false);
+                    // Execute qualquer lógica adicional aqui, se necessário
+                    Debug.Log("Item pegado!");
+                    // Sair do loop após pegar um item
+                    break;
+                }
             }
         }
     }
+
     void Attack()
     {
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado antes de permitir o ataque

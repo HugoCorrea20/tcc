@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 8686616322944441806}
   - component: {fileID: 1071659833025827821}
   - component: {fileID: -6198390741444763555}
-  - component: {fileID: -7799398274525918972}
   - component: {fileID: 2885047573562662553}
+  - component: {fileID: 3377809124409821494}
   m_Layer: 0
-  m_Name: "bala cann\xE3o"
-  m_TagString: Bala
+  m_Name: "Inimigo bala cann\xE3o"
+  m_TagString: balainimigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,19 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-7799398274525918972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8699405401561897845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe11b6e46e25f3046af462b4280f74f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  limiteDeX: 50
 --- !u!58 &2885047573562662553
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -162,3 +149,17 @@ CircleCollider2D:
   m_Offset: {x: -0.007846752, y: -0.016657788}
   serializedVersion: 2
   m_Radius: 0.7183444
+--- !u!114 &3377809124409821494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699405401561897845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8328bc27ed57d164896eb0bc390ba0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidade: 10
+  limiteDeX: 100

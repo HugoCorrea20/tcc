@@ -13,7 +13,7 @@ public class MovimentoNavio : MonoBehaviour
     private float tempoUltimoTiro;
     private bool primeiroTiroDisparado = false;
     public float tempotiro = 3f;
-    public int danorecibindo = 10;
+    public int danorecibido = 10;
 
     void Start()
     {

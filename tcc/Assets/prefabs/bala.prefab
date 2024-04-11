@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 3820090431360889701}
   - component: {fileID: -261558210604491609}
   - component: {fileID: -921299614067402867}
+  - component: {fileID: -4197661845684906128}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: bala
   m_TagString: Bala
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,3 +149,15 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &-4197661845684906128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423443356795015910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f273c0aee1cc9aa4b999fb97a3631ca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

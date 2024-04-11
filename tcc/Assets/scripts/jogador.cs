@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class jogador : MonoBehaviour
 {
@@ -20,8 +22,10 @@ public class jogador : MonoBehaviour
     private float lastShootTime;
     public float shootCooldown = 5f; // Tempo de espera entre os tiros
     public float pickupRange = 1.5f; // Ajuste a distância de pegar o item conforme necessário
-    public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
     private bool itemPegado = false;
+    public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
+    public GameObject fimObjeto; // Objeto do fim do jogo
+    public TextMeshProUGUI avisoText; // Referência ao objeto de texto para exibir o aviso
     public int danorecibido = 10;
 
 
@@ -85,6 +89,7 @@ public class jogador : MonoBehaviour
                     currentItem.SetActive(false);
                     // Execute qualquer lógica adicional aqui, se necessário
                     Debug.Log("Item pegado!");
+                    itemPegado = true; // Define o itemPegado como verdadeiro
                     // Sair do loop após pegar um item
                     break;
                 }
@@ -108,7 +113,7 @@ public class jogador : MonoBehaviour
             }
         }
     }
-
+   
     void Shoot()
     {
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado antes de permitir o tiro
@@ -169,6 +174,25 @@ public class jogador : MonoBehaviour
             Destroy(collision.gameObject); // Destrua a bala inimiga
             TakeDamage(danorecibido); // Cause dano ao jogador
         }
+        if (collision.CompareTag("fim")) // Verifica se colidiu com o objeto de fim do jogo
+        {
+            if (itemPegado)
+            {
+                fimObjeto.SetActive(true);
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                StartCoroutine(ShowAviso("Você precisa pegar o item primeiro!")); // Exibe o aviso ao jogador
+            }
+        }
+    }
+    IEnumerator ShowAviso(string mensagem)
+    {
+        avisoText.text = mensagem; // Define o texto do aviso
+        avisoText.gameObject.SetActive(true); // Ativa o objeto de texto
+        yield return new WaitForSeconds(2f); // Aguarda 2 segundos
+        avisoText.gameObject.SetActive(false); // Desativa o objeto de texto
     }
 
 }

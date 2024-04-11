@@ -9,6 +9,7 @@ TagManager:
   - Inimigo
   - Item
   - balainimigo
+  - fim
   layers:
   - Default
   - TransparentFX

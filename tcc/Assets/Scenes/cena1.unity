@@ -1374,8 +1374,8 @@ MonoBehaviour:
   balaPrefab: {fileID: 8699405401561897845, guid: 5f365df14cc90c44289b53b5bd19fe67, type: 3}
   pontoDeSpawn: {fileID: 919096378}
   velocidadeBala: 10
-  tempotiro: 3
-  danorecibindo: 10
+  tempotiro: 2
+  danorecibido: 10
 --- !u!61 &1002017015
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1670,7 +1670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1112492320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2217,8 +2217,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1333613531}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04481612, y: 0.0029423283, z: -0.00013199693, w: 0.99899095}
-  m_LocalPosition: {x: -82.2589, y: 1.8944893, z: -10}
+  m_LocalRotation: {x: 0.044164475, y: 0.0029386072, z: -0.00012990936, w: 0.99902}
+  m_LocalPosition: {x: -82.25883, y: 1.8813572, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3130,7 +3130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1980007559}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04481612, y: 0.0029423283, z: -0.00013199693, w: 0.99899095}
+  m_LocalRotation: {x: 0.044164475, y: 0.0029386072, z: -0.00012990936, w: 0.99902}
   m_LocalPosition: {x: -82.2, y: -8.43, z: -10}
   m_LocalScale: {x: 2.48, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3743,6 +3743,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7835022070990811387, guid: 5c6ff3d729968b64a9c7551952d0b59c, type: 3}
+      propertyPath: danorecibido
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835022070990811387, guid: 5c6ff3d729968b64a9c7551952d0b59c, type: 3}
+      propertyPath: shootCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835022070990811387, guid: 5c6ff3d729968b64a9c7551952d0b59c, type: 3}
       propertyPath: alcanceDeVisao
       value: 15
       objectReference: {fileID: 0}
@@ -3798,6 +3806,14 @@ PrefabInstance:
     - target: {fileID: 5024857459246436159, guid: b7d1cb5acb1eb494784e4800596ca582, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445214604895726380, guid: b7d1cb5acb1eb494784e4800596ca582, type: 3}
+      propertyPath: danorecibido
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7445214604895726380, guid: b7d1cb5acb1eb494784e4800596ca582, type: 3}
+      propertyPath: shootCooldown
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7445214604895726380, guid: b7d1cb5acb1eb494784e4800596ca582, type: 3}
       propertyPath: alcanceDeVisao

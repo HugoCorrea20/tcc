@@ -20,13 +20,14 @@ public class NavioInimigo : MonoBehaviour
     private bool movendoDireita = true;
     private bool atirando = false;
     public float tempodetiro= 20f;
+    public float shootCooldown = 5;
     public int danorecibido = 10;
 
     void Start()
     {
         currentHealth = maxHealth;
         jogador = GameObject.FindGameObjectWithTag("Player");
-        InvokeRepeating("AtirarSeJogadorVisivel", 0f, 5f);
+        InvokeRepeating("AtirarSeJogadorVisivel", 0f, shootCooldown);
     }
 
     void Update()

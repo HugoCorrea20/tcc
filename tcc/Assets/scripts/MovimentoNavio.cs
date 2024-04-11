@@ -76,7 +76,7 @@ public class MovimentoNavio : MonoBehaviour
         if (collision.gameObject.CompareTag("balainimigo"))
         {
             Destroy(collision.gameObject); // Destrua a bala inimiga
-            TakeDamage(danorecibindo); // Cause dano ao jogador
+            TakeDamage(danorecibido); // Cause dano ao jogador
         }
     }
 }

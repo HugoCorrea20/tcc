@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class jogador : MonoBehaviour
 {
+    public int maxHealth = 100; // Vida máxima do jogador
+    public int currentHealth; // Vida atual do jogador
     public float speed = 5f;
     public float jumpForce = 10f;
     public GameObject bulletPrefab;
@@ -19,10 +22,12 @@ public class jogador : MonoBehaviour
     public float pickupRange = 1.5f; // Ajuste a distância de pegar o item conforme necessário
     public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
     private bool itemPegado = false;
+    public int danorecibido = 10;
 
 
     void Start()
     {
+        currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         lastShootTime = -shootCooldown; // Configura o tempo inicial de modo que o jogador possa atirar imediatamente
     }
@@ -126,6 +131,20 @@ public class jogador : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce(shootDirection * velocidade_tiro, ForceMode2D.Impulse);
         }
     }
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -143,4 +162,13 @@ public class jogador : MonoBehaviour
             isGrounded = false;
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("balainimigo"))
+        {
+            Destroy(collision.gameObject); // Destrua a bala inimiga
+            TakeDamage(danorecibido); // Cause dano ao jogador
+        }
+    }
+
 }

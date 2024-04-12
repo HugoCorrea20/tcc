@@ -164,11 +164,13 @@ public class jogador : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
+        UpdateHealthbar();
 
         if (currentHealth <= 0)
         {
             Die();
         }
+
     }
     void Die()
     {
@@ -198,7 +200,7 @@ public class jogador : MonoBehaviour
         {
             Destroy(collision.gameObject); // Destrua a bala inimiga
             TakeDamage(danorecibido); // Cause dano ao jogador
-            UpdateHealthbar();
+            
         }
         if (collision.CompareTag("fim")) // Verifica se colidiu com o objeto de fim do jogo
         {

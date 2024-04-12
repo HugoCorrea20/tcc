@@ -22,14 +22,25 @@ public class NavioInimigo : MonoBehaviour
     public float tempodetiro= 20f;
     public float shootCooldown = 5;
     public int danorecibido = 10;
+    public Transform heatlhbar; //barra verde
+    public GameObject heatltbarobject; // objeto pai das barras 
+
+    private Vector3 heatltbarScale; //tamanho da barra
+    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
 
     void Start()
     {
         currentHealth = maxHealth;
         jogador = GameObject.FindGameObjectWithTag("Player");
         InvokeRepeating("AtirarSeJogadorVisivel", 0f, shootCooldown);
+        heatltbarScale = heatlhbar.localScale;
+        heathpercent = heatltbarScale.x / currentHealth;
     }
-
+    void UpdateHealthbar()
+    {
+        heatltbarScale.x = heathpercent * currentHealth;
+        heatlhbar.localScale = heatltbarScale;
+    }
     void Update()
     {
         if (!atirando) // Continua o movimento apenas se não estiver atirando
@@ -109,6 +120,7 @@ public class NavioInimigo : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
+        UpdateHealthbar();
 
         if (currentHealth <= 0)
         {

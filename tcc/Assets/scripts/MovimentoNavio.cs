@@ -14,13 +14,24 @@ public class MovimentoNavio : MonoBehaviour
     private bool primeiroTiroDisparado = false;
     public float tempotiro = 3f;
     public int danorecibido = 10;
+    public Transform heatlhbar; //barra verde
+    public GameObject heatltbarobject; // objeto pai das barras 
+
+    private Vector3 heatltbarScale; //tamanho da barra
+    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
 
     void Start()
     {
         tempoUltimoTiro = Time.time;
         currentHealth = maxHealth; // Inicialize a vida atual com a vida máxima
+        heatltbarScale = heatlhbar.localScale;
+        heathpercent = heatltbarScale.x / currentHealth;
     }
-
+    void UpdateHealthbar()
+    {
+        heatltbarScale.x = heathpercent * currentHealth;
+        heatlhbar.localScale = heatltbarScale;
+    }
     void Update()
     {
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado
@@ -56,6 +67,7 @@ public class MovimentoNavio : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
+        UpdateHealthbar();
 
         if (currentHealth <= 0)
         {

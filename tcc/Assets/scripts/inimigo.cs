@@ -19,12 +19,25 @@ public class inimigo : MonoBehaviour
     private GameObject player; // Referência ao jogador
     private Transform currentFirePoint; // Ponto de origem atual do tiro
     private bool isAlert = false; // Verifica se o inimigo está alerta
+    public Transform heatlhbar; //barra verde
+    public GameObject heatltbarobject ; // objeto pai das barras 
+
+    private Vector3 heatltbarScale; //tamanho da barra
+    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
 
     void Start()
     {
         currentHealth = maxHealth;
         InvokeRepeating("Shoot", 0f, fireRate);
         player = GameObject.FindGameObjectWithTag("Player"); // Encontrar o jogador pelo tag
+        heatltbarScale = heatlhbar.localScale;
+        heathpercent = heatltbarScale.x / currentHealth;
+
+    }
+    void UpdateHealthbar()
+    {
+        heatltbarScale.x = heathpercent * currentHealth;
+        heatlhbar.localScale = heatltbarScale;
     }
 
     void Update()
@@ -88,10 +101,11 @@ public class inimigo : MonoBehaviour
         }
     }
 
-
+   
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
+        UpdateHealthbar();
 
         if (currentHealth <= 0)
         {

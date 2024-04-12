@@ -27,6 +27,11 @@ public class jogador : MonoBehaviour
     public GameObject fimObjeto; // Objeto do fim do jogo
     public TextMeshProUGUI avisoText; // Referência ao objeto de texto para exibir o aviso
     public int danorecibido = 10;
+    public Transform heatlhbar; //barra verde
+    public GameObject heatltbarobject; // objeto pai das barras 
+
+    private Vector3 heatltbarScale; //tamanho da barra
+    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
 
 
     void Start()
@@ -34,8 +39,14 @@ public class jogador : MonoBehaviour
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         lastShootTime = -shootCooldown; // Configura o tempo inicial de modo que o jogador possa atirar imediatamente
+        heatltbarScale = heatlhbar.localScale;
+        heathpercent = heatltbarScale.x / currentHealth;
     }
-
+    void UpdateHealthbar()
+    {
+        heatltbarScale.x = heathpercent * currentHealth;
+        heatlhbar.localScale = heatltbarScale;
+    }
     void Update()
     {
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado
@@ -187,6 +198,7 @@ public class jogador : MonoBehaviour
         {
             Destroy(collision.gameObject); // Destrua a bala inimiga
             TakeDamage(danorecibido); // Cause dano ao jogador
+            UpdateHealthbar();
         }
         if (collision.CompareTag("fim")) // Verifica se colidiu com o objeto de fim do jogo
         {

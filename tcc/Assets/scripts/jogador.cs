@@ -40,21 +40,7 @@ public class jogador : MonoBehaviour
     {
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado
         {
-            float moveHorizontal = Input.GetAxis("Horizontal");
-
-            Vector2 movement = new Vector2(moveHorizontal, 0f);
-
-            rb.velocity = new Vector2(movement.x * speed, rb.velocity.y);
-
-            if (moveHorizontal != 0)
-            {
-                lastDirection = Mathf.Sign(moveHorizontal);
-            }
-            if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-            {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                isGrounded = false;
-            }
+            MovimentarJogador();
 
             if (Input.GetMouseButtonDown(1) && Time.time - lastShootTime > shootCooldown) // Verifica se o tempo decorrido é maior que o tempo de espera
             {
@@ -71,6 +57,34 @@ public class jogador : MonoBehaviour
             }
         }
     }
+
+    void MovimentarJogador()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+
+        rb.velocity = new Vector2(moveHorizontal * speed, rb.velocity.y);
+
+        if (moveHorizontal != 0)
+        {
+            lastDirection = Mathf.Sign(moveHorizontal);
+            Flip();
+        }
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isGrounded = false;
+        }
+    }
+
+    void Flip()
+    {
+        // Inverte a escala do jogador para mudar a direção visualmente
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * lastDirection;
+        transform.localScale = scale;
+    }
+
     void PickupItem()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, pickupRange);

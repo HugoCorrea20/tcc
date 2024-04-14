@@ -4023,7 +4023,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022513084}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01144626, y: 0.00009067129, z: -0.0000010379151, w: 0.9999345}
+  m_LocalRotation: {x: 0.012252732, y: 0.00008809568, z: -0.0000010794937, w: 0.99992496}
   m_LocalPosition: {x: -21.9947, y: 5.594, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5344,8 +5344,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325579780}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.01144626, y: 0.00009067129, z: -0.0000010379151, w: 0.9999345}
-  m_LocalPosition: {x: -21.996513, y: 5.052971, z: -10}
+  m_LocalRotation: {x: 0.012252732, y: 0.00008809568, z: -0.0000010794937, w: 0.99992496}
+  m_LocalPosition: {x: -21.996462, y: 5.06911, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9143,6 +9143,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 626ad1e31fb1fcf47b5b0e07a1c0a644, type: 3}
+    - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: avisoText
+      value: 
+      objectReference: {fileID: 524994071}
+    - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: fimObjeto
+      value: 
+      objectReference: {fileID: 1414771167}
     - target: {fileID: 6206690345221272191, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
       propertyPath: m_Name
       value: jogador

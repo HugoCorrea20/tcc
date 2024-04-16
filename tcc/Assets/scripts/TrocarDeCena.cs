@@ -22,8 +22,12 @@ public class TrocarDeCena : MonoBehaviour
             StartCoroutine(TransicaoParaProximaCena());
         }
     }
+    public void IniciarTransicao()
+    {
+        StartCoroutine(TransicaoParaProximaCena());
+    }
 
-    IEnumerator TransicaoParaProximaCena()
+    public IEnumerator TransicaoParaProximaCena()
     {
         // Gradualmente aumenta a opacidade da imagem de transição
         float tempoDecorrido = 0f;

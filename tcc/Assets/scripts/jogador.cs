@@ -32,6 +32,9 @@ public class jogador : MonoBehaviour
 
     private Vector3 heatltbarScale; //tamanho da barra
     private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
+    public string proximaCena; // Nome da próxima cena a ser carregada
+    public float tempoDeTransicao = 1f; // Tempo da transição
+    public Image imagemTransicao; // Referência para a imagem de transição
 
 
     void Start()
@@ -177,7 +180,33 @@ public class jogador : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    public IEnumerator TransicaoParaProximaCena()
+    {
+        // Gradualmente aumenta a opacidade da imagem de transição
+        float tempoDecorrido = 0f;
+        while (tempoDecorrido < tempoDeTransicao)
+        {
+            // Calcula o progresso da transição
+            float progresso = tempoDecorrido / tempoDeTransicao;
 
+            // Interpola a opacidade da cor da imagem
+            Color cor = imagemTransicao.color;
+            cor.a = Mathf.Lerp(0f, 1f, progresso);
+            imagemTransicao.color = cor;
+
+            // Atualiza o tempo decorrido
+            tempoDecorrido += Time.deltaTime;
+            yield return null;
+        }
+
+        // Garante que a opacidade está no máximo
+        Color corFinal = imagemTransicao.color;
+        corFinal.a = 1f;
+        imagemTransicao.color = corFinal;
+
+        // Carrega a próxima cena após a transição
+        SceneManager.LoadScene(proximaCena);
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Chao"))
@@ -206,8 +235,9 @@ public class jogador : MonoBehaviour
         {
             if (itemPegado)
             {
-                fimObjeto.SetActive(true);
-                Time.timeScale = 0f;
+                //fimObjeto.SetActive(true);
+                //Time.timeScale = 0f;
+                StartCoroutine(TransicaoParaProximaCena());
             }
             else
             {

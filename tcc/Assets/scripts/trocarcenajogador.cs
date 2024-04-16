@@ -12,7 +12,7 @@ public class trocarcenajogador : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player")) // Verifica se o jogador colidiu com o gatilho
+        if (collision.CompareTag("teste")) // Verifica se o jogador colidiu com o gatilho
         {
             // Inicia a cor da imagem de transição com alpha 0
             Color corInicial = imagemTransicao.color;
@@ -23,7 +23,10 @@ public class trocarcenajogador : MonoBehaviour
             StartCoroutine(TransicaoParaProximaCena());
         }
     }
-
+    public void IniciarTransicao()
+    {
+        StartCoroutine(TransicaoParaProximaCena());
+    }
     IEnumerator TransicaoParaProximaCena()
     {
         // Gradualmente aumenta a opacidade da imagem de transição

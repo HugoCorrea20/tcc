@@ -51,13 +51,18 @@ public class inimigo : MonoBehaviour
             if (transform.position.x <= limiteEsquerdo)
             {
                 direcao = 1; // Altera a direção para a direita
+                             // Define o flip para a direita
+                transform.localScale = new Vector3(1, 1, 1);
             }
             else if (transform.position.x >= limiteDireito)
             {
                 direcao = -1; // Altera a direção para a esquerda
+                              // Define o flip para a esquerda
+                transform.localScale = new Vector3(-1, 1, 1);
             }
         }
     }
+
 
     void Shoot()
     {
@@ -71,13 +76,15 @@ public class inimigo : MonoBehaviour
             // Calcula a posição relativa do jogador em relação ao inimigo
             Vector2 directionToPlayer = player.transform.position - transform.position;
 
-            // Determina o ponto de origem do tiro com base na posição relativa do jogador
+            // Atualiza o flip do inimigo com base na posição relativa do jogador
             if (directionToPlayer.x < 0) // Se o jogador estiver à esquerda do inimigo
             {
+                transform.localScale = new Vector3(-1, 1, 1); // Flip para a esquerda
                 currentFirePoint = firePointLeft;
             }
             else
             {
+                transform.localScale = new Vector3(1, 1, 1); // Sem flip (direita)
                 currentFirePoint = firePointRight;
             }
 
@@ -101,7 +108,8 @@ public class inimigo : MonoBehaviour
         }
     }
 
-   
+
+
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;

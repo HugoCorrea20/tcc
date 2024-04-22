@@ -35,6 +35,9 @@ public class jogador : MonoBehaviour
     public string proximaCena; // Nome da próxima cena a ser carregada
     public float tempoDeTransicao = 1f; // Tempo da transição
     public Image imagemTransicao; // Referência para a imagem de transição
+    private Animator animator; // Referência ao componente Animator
+    public bool wasMoving = false; // Indica se o jogador estava se movendo no frame anterior
+
 
 
     void Start()
@@ -44,6 +47,7 @@ public class jogador : MonoBehaviour
         lastShootTime = -shootCooldown; // Configura o tempo inicial de modo que o jogador possa atirar imediatamente
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
+        animator = GetComponent<Animator>(); // Obtém o componente Animator
     }
     void UpdateHealthbar()
     {
@@ -69,7 +73,9 @@ public class jogador : MonoBehaviour
             {
                 PickupItem();
             }
+            UpdateAnimations();
         }
+
     }
 
     void MovimentarJogador()
@@ -90,7 +96,26 @@ public class jogador : MonoBehaviour
             isGrounded = false;
         }
     }
+    void UpdateAnimations()
+    {
+        // Verifica se o jogador está se movendo
+        bool isMoving = Mathf.Abs(rb.velocity.x) > 0.01f;
 
+        // Atualiza as animações com base no estado atual
+        if (isMoving)
+        {
+            animator.SetBool("movendo", true); // Ativa a animação de movimento
+            animator.SetBool("parado", false); // Desativa a animação de parada
+        }
+        else
+        {
+            animator.SetBool("movendo", false); // Desativa a animação de movimento
+            animator.SetBool("parado", !wasMoving); // Ativa a animação de parada apenas se o jogador estava se movendo no frame anterior
+        }
+
+        // Atualiza o estado anterior de movimento
+        wasMoving = isMoving;
+    }
     void Flip()
     {
         // Inverte a escala do jogador para mudar a direção visualmente

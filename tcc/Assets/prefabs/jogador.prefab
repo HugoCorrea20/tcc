@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5247326863637614194}
   - component: {fileID: 5829050699758807886}
   - component: {fileID: 8519599331350687815}
+  - component: {fileID: 4654402383394480169}
   m_Layer: 7
   m_Name: jogador
   m_TagString: Player
@@ -109,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 21
-  m_Sprite: {fileID: 21300000, guid: b2cdfab2655070c44a441703deb7d639, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad90ad50a3aea3c45a0a6868cd246d57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -135,7 +136,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -162,7 +163,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   speed: 5
-  jumpForce: 10
+  jumpForce: 20
   bulletPrefab: {fileID: 3423443356795015910, guid: 2bfe91e2658e6cf40b6e733d62bbb9fd, type: 3}
   velocidade_tiro: 10
   bulletSpawnPointRight: {fileID: 98998666473634429}
@@ -179,6 +180,7 @@ MonoBehaviour:
   proximaCena: loading 2
   tempoDeTransicao: 1
   imagemTransicao: {fileID: 0}
+  wasMoving: 0
 --- !u!60 &8519599331350687815
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -215,7 +217,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.63, y: 1.94}
+    oldSize: {x: 0.99, y: 2.23}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -255,6 +257,27 @@ PolygonCollider2D:
       - {x: 0.03243269, y: -0.15268269}
       - {x: 0.12210439, y: -0.11073102}
   m_UseDelaunayMesh: 0
+--- !u!95 &4654402383394480169
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206690345221272191}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5b219d22026726b4f8eb4b7d69e4e8db, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9138979688782814378
 GameObject:
   m_ObjectHideFlags: 0

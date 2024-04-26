@@ -2,52 +2,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class jacare : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
-    private bool isAlert = false; // Verifica se o inimigo está alerta
-    private int direcao = 1; // 1 para direita, -1 para esquerda
-    public float velocidade = 2f; // Velocidade do inimigo
-    public float limiteEsquerdo = -5f; // Limite esquerdo do movimento
-    public float limiteDireito = 5f; // Limite direito do movimento
+    private bool isAlert = false;
+    private Transform player; // Referência ao jogador
+    private int direcao = 1;
+    public float velocidade = 2f;
+    public float limiteEsquerdo = -5f;
+    public float limiteDireito = 5f;
     public int danorecibido = 10;
-    public Transform heatlhbar; //barra verde
-    public GameObject heatltbarobject; // objeto pai das barras 
-    private Vector3 heatltbarScale; //tamanho da barra
-    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
+    public float damageInterval = 5f; // Intervalo de dano
+    private float lastDamageTime; // Tempo do último dano
 
-    // Start is called before the first frame update
+    public Transform heatlhbar;
+    public GameObject heatltbarobject;
+    private Vector3 heatltbarScale;
+    private float heathpercent;
+
     void Start()
     {
         currentHealth = maxHealth;
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
+
+        player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
+        lastDamageTime = Time.time; // Inicializa o tempo do último dano
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!isAlert) // Move apenas se não estiver alerta
+        if (!isAlert)
         {
-            // Move o inimigo na direção atual
             transform.Translate(Vector2.right * direcao * velocidade * Time.deltaTime);
 
-            // Verifica se o inimigo atingiu um dos limites
             if (transform.position.x <= limiteEsquerdo)
             {
-                direcao = 1; // Altera a direção para a direita
-                             // Define o flip para a direita
+                direcao = 1;
                 transform.localScale = new Vector3(1, 1, 1);
             }
             else if (transform.position.x >= limiteDireito)
             {
-                direcao = -1; // Altera a direção para a esquerda
-                              // Define o flip para a esquerda
+                direcao = -1;
                 transform.localScale = new Vector3(-1, 1, 1);
             }
+
+            // Verifica se o jogador está dentro do alcance de detecção
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            if (distanceToPlayer < 5f) // Defina a distância conforme necessário
+            {
+                isAlert = true;
+            }
+        }
+        else
+        {
+            // Move em direção ao jogador
+            transform.position = Vector2.MoveTowards(transform.position, player.position, velocidade * Time.deltaTime);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Verifica se o jacaré colidiu com o jogador
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Causa dano ao jogador
+            collision.gameObject.GetComponent<jogador>().TakeDamage(danorecibido);
+        }
+    }
+
+
     void UpdateHealthbar()
     {
         heatltbarScale.x = heathpercent * currentHealth;

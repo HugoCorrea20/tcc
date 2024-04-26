@@ -22,7 +22,7 @@ public class jacare : MonoBehaviour
     public GameObject heatltbarobject;
     private Vector3 heatltbarScale;
     private float heathpercent;
-
+    public float alcanceDetecao = 5;
     void Start()
     {
         currentHealth = maxHealth;
@@ -52,7 +52,7 @@ public class jacare : MonoBehaviour
 
             // Verifica se o jogador está dentro do alcance de detecção
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer < 5f) // Defina a distância conforme necessário
+            if (distanceToPlayer < alcanceDetecao) // Verifica se o jogador está dentro do alcance de detecção
             {
                 isAlert = true;
             }
@@ -61,6 +61,13 @@ public class jacare : MonoBehaviour
         {
             // Move em direção ao jogador
             transform.position = Vector2.MoveTowards(transform.position, player.position, velocidade * Time.deltaTime);
+
+            // Verifica se o jogador está fora do alcance de detecção
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            if (distanceToPlayer > alcanceDetecao) // Verifica se o jogador está fora do alcance de detecção
+            {
+                isAlert = false;
+            }
         }
     }
 

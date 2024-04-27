@@ -29,7 +29,7 @@ public class jogador : MonoBehaviour
     public int danorecibido = 10;
     public Transform heatlhbar; //barra verde
     public GameObject heatltbarobject; // objeto pai das barras 
-
+    public GameObject pá;
     private Vector3 heatltbarScale; //tamanho da barra
     private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
     public string proximaCena; // Nome da próxima cena a ser carregada
@@ -37,6 +37,8 @@ public class jogador : MonoBehaviour
     public Image imagemTransicao; // Referência para a imagem de transição
     private Animator animator; // Referência ao componente Animator
     public bool wasMoving = false; // Indica se o jogador estava se movendo no frame anterior
+    public bool papegado =false;
+
 
 
 
@@ -130,25 +132,28 @@ public class jogador : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Item"))
+            if (collider.CompareTag("Item")) // Verifica se é um item genérico
             {
-                float distanceToItem = Vector2.Distance(transform.position, collider.transform.position);
-
-                if (distanceToItem <= pickupRange)
-                {
-                    // Pegar o item
-                    currentItem = collider.gameObject;
-                    // Desative o item (ou destrua-o)
-                    currentItem.SetActive(false);
-                    // Execute qualquer lógica adicional aqui, se necessário
-                    Debug.Log("Item pegado!");
-                    itemPegado = true; // Define o itemPegado como verdadeiro
-                    // Sair do loop após pegar um item
-                    break;
-                }
+                // Pegar o item genérico
+                currentItem = collider.gameObject;
+                currentItem.SetActive(false); // Desativa o item
+                Debug.Log("Item genérico pegado!");
+                itemPegado = true;
+                break;
+            }
+            else if (collider.CompareTag("Pá")) // Verifica se é uma pá
+            {
+                // Pegar a pá
+                pá = collider.gameObject;
+                pá.SetActive(false); // Desativa a pá
+                Debug.Log("Pá pegada!");
+                // Execute qualquer lógica adicional aqui, se necessário
+                papegado = true;
+                break;
             }
         }
     }
+
 
     void Attack()
     {
@@ -162,6 +167,20 @@ public class jogador : MonoBehaviour
                 if (collider.CompareTag("Inimigo"))
                 {
                     collider.GetComponent<inimigo>().TakeDamage(10);
+                }
+            }
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("jacare"))
+                {
+                    collider.GetComponent<jacare>().TakeDamage(10);
+                }
+            }
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("jaquatirica"))
+                {
+                    collider.GetComponent<jaquatirica>().TakeDamage(10);
                 }
             }
         }

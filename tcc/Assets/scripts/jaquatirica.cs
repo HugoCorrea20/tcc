@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
-public class jacare : MonoBehaviour
+public class jaquatirica : MonoBehaviour
 {
     public int maxHealth = 100;
     public int currentHealth;
@@ -16,7 +14,7 @@ public class jacare : MonoBehaviour
     public float limiteDireito = 5f;
     public int danorecibido = 10;
     public float damageInterval = 5f; // Intervalo de dano
-   
+
 
     public Transform heatlhbar;
     public GameObject heatltbarobject;
@@ -30,7 +28,7 @@ public class jacare : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
 
         player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
-       
+
     }
 
     void Update()

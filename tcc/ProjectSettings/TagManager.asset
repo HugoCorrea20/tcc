@@ -10,6 +10,9 @@ TagManager:
   - Item
   - balainimigo
   - fim
+  - "P\xE1"
+  - jacare
+  - jaquatirica
   layers:
   - Default
   - TransparentFX

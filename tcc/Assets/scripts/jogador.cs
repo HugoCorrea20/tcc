@@ -37,8 +37,9 @@ public class jogador : MonoBehaviour
     public Image imagemTransicao; // Referência para a imagem de transição
     private Animator animator; // Referência ao componente Animator
     public bool wasMoving = false; // Indica se o jogador estava se movendo no frame anterior
-    public bool papegado =false;
-
+    public bool papegado =false; 
+    public Transform localCavar;
+    public GameObject item;
 
 
 
@@ -73,11 +74,24 @@ public class jogador : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
-                PickupItem();
+                if (papegado && Vector2.Distance(transform.position, localCavar.position) < 1.5f) // Verifica se o jogador está segurando a pá e está perto do local de cavar
+                {
+                    Cavar(); // Chama a função para cavar
+                }
+                else
+                {
+                    PickupItem();
+                }
             }
             UpdateAnimations();
         }
+    }
 
+    void Cavar()
+    {
+        // Ative o item a ser coletado
+        item.SetActive(true);
+        Debug.Log("Item coletado após cavar!");
     }
 
     void MovimentarJogador()

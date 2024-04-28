@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,18 +12,18 @@ public class jogador : MonoBehaviour
     public int currentHealth; // Vida atual do jogador
     public float speed = 5f;
     public float jumpForce = 10f;
-    public GameObject bulletPrefab;
-    public float velocidade_tiro = 10f;
-    public Transform bulletSpawnPointRight;
-    public Transform bulletSpawnPointLeft;
+    //public GameObject bulletPrefab;
+   // public float velocidade_tiro = 10f;
+   // public Transform bulletSpawnPointRight;
+   // public Transform bulletSpawnPointLeft;
     private Rigidbody2D rb;
     private bool isGrounded;
     private float lastDirection = 1f;
     public float attackRange = 1.5f; // Ajuste a distância de ataque conforme necessário
-    private float lastShootTime;
-    public float shootCooldown = 5f; // Tempo de espera entre os tiros
+    //private float lastShootTime;
+    //public float shootCooldown = 5f; // Tempo de espera entre os tiros
     public float pickupRange = 1.5f; // Ajuste a distância de pegar o item conforme necessário
-    private bool itemPegado = false;
+    public  bool itemPegado = false;
     public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
     public GameObject fimObjeto; // Objeto do fim do jogo
     public TextMeshProUGUI avisoText; // Referência ao objeto de texto para exibir o aviso
@@ -40,6 +41,8 @@ public class jogador : MonoBehaviour
     public bool papegado =false; 
     public Transform localCavar;
     public GameObject item;
+    public GameObject item2;
+    public bool itempegado2 = false;
 
 
 
@@ -47,7 +50,7 @@ public class jogador : MonoBehaviour
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-        lastShootTime = -shootCooldown; // Configura o tempo inicial de modo que o jogador possa atirar imediatamente
+       // lastShootTime = -shootCooldown; // Configura o tempo inicial de modo que o jogador possa atirar imediatamente
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
         animator = GetComponent<Animator>(); // Obtém o componente Animator
@@ -62,12 +65,13 @@ public class jogador : MonoBehaviour
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado
         {
             MovimentarJogador();
-
+            /*
             if (Input.GetMouseButtonDown(1) && Time.time - lastShootTime > shootCooldown) // Verifica se o tempo decorrido é maior que o tempo de espera
             {
                 Shoot();
                 lastShootTime = Time.time; // Atualiza o tempo do último tiro
             }
+            */
             if (Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse para ataque de perto
             {
                 Attack();
@@ -165,6 +169,15 @@ public class jogador : MonoBehaviour
                 papegado = true;
                 break;
             }
+            if(collider.CompareTag("item2"))
+            {
+                item2 = collider.gameObject;
+                item2.SetActive(false);
+                Debug.Log("item2 pegado");
+
+                itempegado2 = true;
+                break;
+            }
         }
     }
 
@@ -200,6 +213,7 @@ public class jogador : MonoBehaviour
         }
     }
    
+    /*
     void Shoot()
     {
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado antes de permitir o tiro
@@ -222,6 +236,7 @@ public class jogador : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce(shootDirection * velocidade_tiro, ForceMode2D.Impulse);
         }
     }
+    */
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
@@ -287,7 +302,7 @@ public class jogador : MonoBehaviour
         {
             Destroy(collision.gameObject); // Destrua a bala inimiga
             TakeDamage(danorecibido); // Cause dano ao jogador
-            
+
         }
         if (collision.CompareTag("fim")) // Verifica se colidiu com o objeto de fim do jogo
         {
@@ -302,7 +317,19 @@ public class jogador : MonoBehaviour
                 StartCoroutine(ShowAviso("Você precisa pegar o item primeiro!")); // Exibe o aviso ao jogador
             }
         }
+        if (collision.CompareTag("fim2")) // Verifica se colidiu com o objeto de fim 2 do jogo
+        {
+            if (itemPegado && itempegado2) // Verifica se ambos os itens foram pegos
+            {
+                StartCoroutine(TransicaoParaProximaCena());
+            }
+            else
+            {
+                StartCoroutine(ShowAviso("Você precisa pegar ambos os itens primeiro!")); // Exibe o aviso ao jogador
+            }
+        }
     }
+
     IEnumerator ShowAviso(string mensagem)
     {
         avisoText.text = mensagem; // Define o texto do aviso
@@ -310,5 +337,11 @@ public class jogador : MonoBehaviour
         yield return new WaitForSeconds(2f); // Aguarda 2 segundos
         avisoText.gameObject.SetActive(false); // Desativa o objeto de texto
     }
-
+    IEnumerator ShowAviso2(string mensagem)
+    {
+        avisoText.text = mensagem; // Define o texto do aviso
+        avisoText.gameObject.SetActive(true); // Ativa o objeto de texto
+        yield return new WaitForSeconds(2f); // Aguarda 2 segundos
+        avisoText.gameObject.SetActive(false); // Desativa o objeto de texto
+    }
 }

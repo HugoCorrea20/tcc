@@ -13,6 +13,8 @@ TagManager:
   - "P\xE1"
   - jacare
   - jaquatirica
+  - item2
+  - fim2
   layers:
   - Default
   - TransparentFX

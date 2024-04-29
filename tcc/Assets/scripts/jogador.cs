@@ -43,7 +43,8 @@ public class jogador : MonoBehaviour
     public GameObject item;
     public GameObject item2;
     public bool itempegado2 = false;
-
+    public GameObject objetoDeAtaque;
+    
 
 
     void Start()
@@ -93,7 +94,8 @@ public class jogador : MonoBehaviour
 
     void Cavar()
     {
-        // Ative o item a ser coletado
+        // Ative o item a ser coletado.
+        
         item.SetActive(true);
         Debug.Log("Item coletado após cavar!");
     }
@@ -188,7 +190,7 @@ public class jogador : MonoBehaviour
         {
             Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
-
+            objetoDeAtaque.SetActive(true);
             foreach (Collider2D collider in colliders)
             {
                 if (collider.CompareTag("Inimigo"))
@@ -211,8 +213,16 @@ public class jogador : MonoBehaviour
                 }
             }
         }
+        StartCoroutine(DesativarObjetoDeAtaque());
     }
-   
+    IEnumerator DesativarObjetoDeAtaque()
+    {
+        // Aguardar um curto período de tempo antes de desativar o objeto de ataque
+        yield return new WaitForSeconds(0.1f); // Ajuste o tempo conforme necessário
+
+        // Desativar o objeto de ataque
+        objetoDeAtaque.SetActive(false);
+    }
     /*
     void Shoot()
     {
@@ -314,7 +324,7 @@ public class jogador : MonoBehaviour
             }
             else
             {
-                StartCoroutine(ShowAviso("Você precisa pegar o item primeiro!")); // Exibe o aviso ao jogador
+                StartCoroutine(ShowAviso("Você precisa pegar o mapa de tesouro primeiro!")); // Exibe o aviso ao jogador
             }
         }
         if (collision.CompareTag("fim2")) // Verifica se colidiu com o objeto de fim 2 do jogo
@@ -325,7 +335,7 @@ public class jogador : MonoBehaviour
             }
             else
             {
-                StartCoroutine(ShowAviso("Você precisa pegar ambos os itens primeiro!")); // Exibe o aviso ao jogador
+                StartCoroutine(ShowAviso("Você precisa pegar ambos os mapas de tesouro  primeiro!")); // Exibe o aviso ao jogador
             }
         }
     }

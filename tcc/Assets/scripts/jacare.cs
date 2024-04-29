@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class jacare : MonoBehaviour
 {
     public int maxHealth = 100;
@@ -16,13 +14,13 @@ public class jacare : MonoBehaviour
     public float limiteDireito = 5f;
     public int danorecibido = 10;
     public float damageInterval = 5f; // Intervalo de dano
-   
 
     public Transform heatlhbar;
     public GameObject heatltbarobject;
     private Vector3 heatltbarScale;
     private float heathpercent;
     public float alcanceDetecao = 5;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -30,7 +28,6 @@ public class jacare : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
 
         player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
-       
     }
 
     void Update()
@@ -59,8 +56,9 @@ public class jacare : MonoBehaviour
         }
         else
         {
-            // Move em direção ao jogador
-            transform.position = Vector2.MoveTowards(transform.position, player.position, velocidade * Time.deltaTime);
+            // Movimento apenas na direção x
+            Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, velocidade * Time.deltaTime);
 
             // Verifica se o jogador está fora do alcance de detecção
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
@@ -81,12 +79,12 @@ public class jacare : MonoBehaviour
         }
     }
 
-
     void UpdateHealthbar()
     {
         heatltbarScale.x = heathpercent * currentHealth;
         heatlhbar.localScale = heatltbarScale;
     }
+
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;

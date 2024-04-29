@@ -1797,7 +1797,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: " Ent\xE3o ele decide virar um pirata para ir atr\xE1s do mapa do tesouro.
     Ao falar com alguns conhecidos da cidade, Jason pede para ajud\xE1-lo a ir atr\xE1s
-    do tesouro, eles se interessam e se juntam a Jason. Jason e seu bando, viaja
+    do tesouro, eles se interessam e se juntam a Jason. Jason e seu bando, viajam
     at\xE9 a ilha Grand Cayman em busca do tesouro perdido. \r\n\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2785,7 +2785,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: creditos
+  m_text: "cr\xE9ditos"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -3321,8 +3321,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: " havia um papel. Jason abre e observa que havia um mapa do tesouro na
     ilha Grand Cayman, mas o mapa do tesouro n\xE3o estava completo e havia uma carta
-    da garrafa que dizia que o resto do mapa do tesouro estar\xE1 espalhado na ilha
-    com marca\xE7\xF5es de lugares que estava cada parte do mapa do tesouro."
+    na garrafa que dizia que o resto do mapa do tesouro est\xE1 espalhado na ilha
+    com marca\xE7\xF5es de lugares onde  est\xE1 cada parte do mapa do tesouro."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -4142,14 +4142,14 @@ RectTransform:
   m_GameObject: {fileID: 1399843312}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.11178853, y: 0.70796454, z: 1}
+  m_LocalScale: {x: 0.21895121, y: 0.70796454, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1528484634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -37.4, y: -15.720146}
+  m_AnchoredPosition: {x: -26.4, y: -11.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1399843314
@@ -4175,7 +4175,7 @@ MonoBehaviour:
   m_text: 'Hugo Alves Correa: Programador'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4235,7 +4235,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -339.7525, w: 8.711694}
+  m_margin: {x: 0, y: 0, z: -252.15329, w: 8.711694}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4534,7 +4534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1528484634
 RectTransform:
   m_ObjectHideFlags: 0

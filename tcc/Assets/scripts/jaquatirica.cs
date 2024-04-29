@@ -57,8 +57,9 @@ public class jaquatirica : MonoBehaviour
         }
         else
         {
-            // Move em direção ao jogador
-            transform.position = Vector2.MoveTowards(transform.position, player.position, velocidade * Time.deltaTime);
+            // Movimento apenas na direção x
+            Vector2 targetPosition = new Vector2(player.position.x, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, velocidade * Time.deltaTime);
 
             // Verifica se o jogador está fora do alcance de detecção
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);

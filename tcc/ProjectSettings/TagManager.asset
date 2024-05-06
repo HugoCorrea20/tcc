@@ -15,6 +15,7 @@ TagManager:
   - jaquatirica
   - item2
   - fim2
+  - escada
   layers:
   - Default
   - TransparentFX

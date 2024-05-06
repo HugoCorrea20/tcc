@@ -44,7 +44,11 @@ public class jogador : MonoBehaviour
     public GameObject item2;
     public bool itempegado2 = false;
     public GameObject objetoDeAtaque;
-    
+    private float vertical;
+    private float velociadeescada = 8f;
+    private bool escadas;
+    private bool escalando;
+    public Rigidbody2D playerrb;
 
 
     void Start()
@@ -89,6 +93,11 @@ public class jogador : MonoBehaviour
                 }
             }
             UpdateAnimations();
+            vertical = UnityEngine.Input.GetAxis("Vertical");
+            if (escadas && Mathf.Abs(vertical) > 0f)
+            {
+                escalando = true;
+            }
         }
     }
 
@@ -290,6 +299,7 @@ public class jogador : MonoBehaviour
         // Carrega a próxima cena após a transição
         SceneManager.LoadScene(proximaCena);
     }
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Chao"))
@@ -320,6 +330,11 @@ public class jogador : MonoBehaviour
             {
                 //fimObjeto.SetActive(true);
                 //Time.timeScale = 0f;
+
+                // Inicia a cor da imagem de transição com alpha 0
+                Color corInicial = imagemTransicao.color;
+                corInicial.a = 0f;
+                imagemTransicao.color = corInicial;
                 StartCoroutine(TransicaoParaProximaCena());
             }
             else
@@ -338,8 +353,38 @@ public class jogador : MonoBehaviour
                 StartCoroutine(ShowAviso("Você precisa pegar ambos os mapas de tesouro  primeiro!")); // Exibe o aviso ao jogador
             }
         }
+        if (collision.CompareTag("escada"))
+        {
+            escadas = true;
+        }
     }
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.CompareTag("escada"))
+        {
+            escadas = false;
+            escalando = false;
+        }
+    }
+    public void IniciarTransicao()
+    {
+        StartCoroutine(TransicaoParaProximaCena());
+    }
+    private void FixedUpdate()
+    {
+        {
+            if (escalando == true)
+            {
+                playerrb.gravityScale = 0f;
+                playerrb.velocity = new Vector2(playerrb.velocity.x, vertical * velociadeescada);
+            }
 
+            else
+            {
+                playerrb.gravityScale = 10f;
+            }
+        }
+    }
     IEnumerator ShowAviso(string mensagem)
     {
         avisoText.text = mensagem; // Define o texto do aviso

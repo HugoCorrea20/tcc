@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe11b6e46e25f3046af462b4280f74f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  limiteDeX: 50
+  limiteDeX: 10
 --- !u!58 &2885047573562662553
 CircleCollider2D:
   m_ObjectHideFlags: 0

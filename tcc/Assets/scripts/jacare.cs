@@ -39,12 +39,12 @@ public class jacare : MonoBehaviour
             if (transform.position.x <= limiteEsquerdo)
             {
                 direcao = 1;
-                transform.localScale = new Vector3(1, 1, 1);
+                transform.localScale = new Vector3(-1, 1, 1);
             }
             else if (transform.position.x >= limiteDireito)
             {
                 direcao = -1;
-                transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(1, 1, 1);
             }
 
             // Verifica se o jogador está dentro do alcance de detecção

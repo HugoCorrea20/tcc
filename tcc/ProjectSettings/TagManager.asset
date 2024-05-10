@@ -16,6 +16,8 @@ TagManager:
   - item2
   - fim2
   - escada
+  - Chave
+  - Alcapao
   layers:
   - Default
   - TransparentFX

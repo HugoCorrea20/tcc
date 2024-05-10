@@ -49,7 +49,12 @@ public class jogador : MonoBehaviour
     private bool escadas;
     private bool escalando;
     public Rigidbody2D playerrb;
-
+    public GameObject localcavar;
+    public GameObject chave;
+    public GameObject alcapao;
+    public bool chavePegada = false;
+    public float alcanceMaximo = 1f;
+    public bool inpute=false;
 
     void Start()
     {
@@ -91,8 +96,29 @@ public class jogador : MonoBehaviour
                 {
                     PickupItem();
                 }
+                // Verifique se o jogador está próximo do alçapão
+                if (Vector2.Distance(transform.position, alcapao.transform.position) < alcanceMaximo)
+                {
+                    // Verifique se o jogador tem a chave
+                    if (chavePegada)
+                    {
+                        // Abra o alçapão
+                        alcapao.SetActive(false);
+                        Debug.Log("Alçapão aberto!");
+                        // Adicione aqui qualquer lógica adicional, como transição de cena, por exemplo
+                    }
+                    else
+                    {
+                        StartCoroutine(ShowAviso("Você precisa da chave para abrir o alçapão!"));
+                    }
+                }
+                inpute = true;
             }
-            UpdateAnimations();
+            if (Input.GetKeyUp(KeyCode.E)) 
+            {
+                inpute = false;
+            }
+                UpdateAnimations();
             vertical = UnityEngine.Input.GetAxis("Vertical");
             if (escadas && Mathf.Abs(vertical) > 0f)
             {
@@ -104,7 +130,7 @@ public class jogador : MonoBehaviour
     void Cavar()
     {
         // Ative o item a ser coletado.
-        
+        localcavar.SetActive(false);
         item.SetActive(true);
         Debug.Log("Item coletado após cavar!");
     }
@@ -189,6 +215,15 @@ public class jogador : MonoBehaviour
                 itempegado2 = true;
                 break;
             }
+            if (collider.CompareTag("Chave"))
+            {
+                chave = collider.gameObject;
+                chave.SetActive(false);
+                Debug.Log("Chave pegada!");
+                chavePegada = true;
+                break;
+            }
+
         }
     }
 
@@ -291,12 +326,12 @@ public class jogador : MonoBehaviour
             yield return null;
         }
 
-        // Garante que a opacidade está no máximo
+        
         Color corFinal = imagemTransicao.color;
         corFinal.a = 1f;
         imagemTransicao.color = corFinal;
 
-        // Carrega a próxima cena após a transição
+        
         SceneManager.LoadScene(proximaCena);
     }
 
@@ -306,7 +341,7 @@ public class jogador : MonoBehaviour
         {
             isGrounded = true;
         }
-
+        
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -356,6 +391,27 @@ public class jogador : MonoBehaviour
         if (collision.CompareTag("escada"))
         {
             escadas = true;
+        }
+       
+
+
+
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Alcapao"))
+        {
+            if (chavePegada && inpute)
+            {
+                // Abra o alçapão
+                alcapao.SetActive(false);
+                Debug.Log("Alçapão aberto!");
+                // Adicione aqui qualquer lógica adicional, como transição de cena, por exemplo
+            }
+            else if (!chavePegada)
+            {
+                StartCoroutine(ShowAviso("Você precisa da chave para abrir o alçapão!"));
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D col)

@@ -448,11 +448,5 @@ public class jogador : MonoBehaviour
         yield return new WaitForSeconds(2f); // Aguarda 2 segundos
         avisoText.gameObject.SetActive(false); // Desativa o objeto de texto
     }
-    IEnumerator ShowAviso2(string mensagem)
-    {
-        avisoText.text = mensagem; // Define o texto do aviso
-        avisoText.gameObject.SetActive(true); // Ativa o objeto de texto
-        yield return new WaitForSeconds(2f); // Aguarda 2 segundos
-        avisoText.gameObject.SetActive(false); // Desativa o objeto de texto
-    }
+    
 }

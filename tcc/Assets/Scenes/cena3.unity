@@ -4457,7 +4457,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 306974127903822169, guid: 4cc668200ab38ac459124715c4443723, type: 3}
       propertyPath: m_SortingOrder
-      value: 53
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 997835186809862849, guid: 4cc668200ab38ac459124715c4443723, type: 3}
       propertyPath: heatlhbar
@@ -8928,7 +8928,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: ceeca39b1d822b24f83c02792cba54ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9129,7 +9129,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.7254902, g: 0.49411768, b: 0.20784315, a: 1}
+  m_Color: {r: 0.764151, g: 0.5494622, b: 0.06848521, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -10259,8 +10259,8 @@ Transform:
   m_GameObject: {fileID: 2040521831}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6400003, y: -5.521225, z: 0.10161073}
-  m_LocalScale: {x: 5.3522043, y: 5.135446, z: 1}
+  m_LocalPosition: {x: -1.6400003, y: -5.611, z: 0.10161073}
+  m_LocalScale: {x: 5.3522043, y: 4.387725, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1727837967}
@@ -10305,7 +10305,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: ceeca39b1d822b24f83c02792cba54ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

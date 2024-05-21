@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 using UnityEngine.UI;
 
 public class jogador : MonoBehaviour
@@ -12,18 +10,12 @@ public class jogador : MonoBehaviour
     public int currentHealth; // Vida atual do jogador
     public float speed = 5f;
     public float jumpForce = 10f;
-    //public GameObject bulletPrefab;
-   // public float velocidade_tiro = 10f;
-   // public Transform bulletSpawnPointRight;
-   // public Transform bulletSpawnPointLeft;
     private Rigidbody2D rb;
     private bool isGrounded;
     private float lastDirection = 1f;
     public float attackRange = 1.5f; // Ajuste a distância de ataque conforme necessário
-    //private float lastShootTime;
-    //public float shootCooldown = 5f; // Tempo de espera entre os tiros
     public float pickupRange = 1.5f; // Ajuste a distância de pegar o item conforme necessário
-    public  bool itemPegado = false;
+    public bool itemPegado = false;
     public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
     public GameObject fimObjeto; // Objeto do fim do jogo
     public TextMeshProUGUI avisoText; // Referência ao objeto de texto para exibir o aviso
@@ -38,7 +30,7 @@ public class jogador : MonoBehaviour
     public Image imagemTransicao; // Referência para a imagem de transição
     private Animator animator; // Referência ao componente Animator
     public bool wasMoving = false; // Indica se o jogador estava se movendo no frame anterior
-    public bool papegado =false; 
+    public bool papegado = false;
     public Transform localCavar;
     public GameObject item;
     public GameObject item2;
@@ -54,34 +46,32 @@ public class jogador : MonoBehaviour
     public GameObject alcapao;
     public bool chavePegada = false;
     public float alcanceMaximo = 1f;
-    public bool inpute=false;
+    public bool inpute = false;
+
+    public Image itemIcon; // Referência ao componente Image na UI para exibir o ícone do item
 
     void Start()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody2D>();
-       // lastShootTime = -shootCooldown; // Configura o tempo inicial de modo que o jogador possa atirar imediatamente
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
         animator = GetComponent<Animator>(); // Obtém o componente Animator
+
+        itemIcon.gameObject.SetActive(false); // Inicialmente invisível
     }
+
     void UpdateHealthbar()
     {
         heatltbarScale.x = heathpercent * currentHealth;
         heatlhbar.localScale = heatltbarScale;
     }
+
     void Update()
     {
         if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado
         {
             MovimentarJogador();
-            /*
-            if (Input.GetMouseButtonDown(1) && Time.time - lastShootTime > shootCooldown) // Verifica se o tempo decorrido é maior que o tempo de espera
-            {
-                Shoot();
-                lastShootTime = Time.time; // Atualiza o tempo do último tiro
-            }
-            */
             if (Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse para ataque de perto
             {
                 Attack();
@@ -96,16 +86,12 @@ public class jogador : MonoBehaviour
                 {
                     PickupItem();
                 }
-                // Verifique se o jogador está próximo do alçapão
                 if (Vector2.Distance(transform.position, alcapao.transform.position) < alcanceMaximo)
                 {
-                    // Verifique se o jogador tem a chave
                     if (chavePegada)
                     {
-                        // Abra o alçapão
                         alcapao.SetActive(false);
                         Debug.Log("Alçapão aberto!");
-                        // Adicione aqui qualquer lógica adicional, como transição de cena, por exemplo
                     }
                     else
                     {
@@ -114,11 +100,11 @@ public class jogador : MonoBehaviour
                 }
                 inpute = true;
             }
-            if (Input.GetKeyUp(KeyCode.E)) 
+            if (Input.GetKeyUp(KeyCode.E))
             {
                 inpute = false;
             }
-                UpdateAnimations();
+            UpdateAnimations();
             vertical = UnityEngine.Input.GetAxis("Vertical");
             if (escadas && Mathf.Abs(vertical) > 0f)
             {
@@ -129,7 +115,6 @@ public class jogador : MonoBehaviour
 
     void Cavar()
     {
-        // Ative o item a ser coletado.
         localcavar.SetActive(false);
         item.SetActive(true);
         Debug.Log("Item coletado após cavar!");
@@ -153,29 +138,27 @@ public class jogador : MonoBehaviour
             isGrounded = false;
         }
     }
+
     void UpdateAnimations()
     {
-        // Verifica se o jogador está se movendo
         bool isMoving = Mathf.Abs(rb.velocity.x) > 0.01f;
 
-        // Atualiza as animações com base no estado atual
         if (isMoving)
         {
-            animator.SetBool("movendo", true); // Ativa a animação de movimento
-            animator.SetBool("parado", false); // Desativa a animação de parada
+            animator.SetBool("movendo", true);
+            animator.SetBool("parado", false);
         }
         else
         {
-            animator.SetBool("movendo", false); // Desativa a animação de movimento
-            animator.SetBool("parado", !wasMoving); // Ativa a animação de parada apenas se o jogador estava se movendo no frame anterior
+            animator.SetBool("movendo", false);
+            animator.SetBool("parado", !wasMoving);
         }
 
-        // Atualiza o estado anterior de movimento
         wasMoving = isMoving;
     }
+
     void Flip()
     {
-        // Inverte a escala do jogador para mudar a direção visualmente
         Vector3 scale = transform.localScale;
         scale.x = Mathf.Abs(scale.x) * lastDirection;
         transform.localScale = scale;
@@ -187,35 +170,35 @@ public class jogador : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.CompareTag("Item")) // Verifica se é um item genérico
+            if (collider.CompareTag("Item"))
             {
-                // Pegar o item genérico
                 currentItem = collider.gameObject;
-                currentItem.SetActive(false); // Desativa o item
+                currentItem.SetActive(false);
                 Debug.Log("Item genérico pegado!");
                 itemPegado = true;
+
+                // Atualizar o ícone do item na UI
+                itemIcon.sprite = currentItem.GetComponent<SpriteRenderer>().sprite;
+                itemIcon.gameObject.SetActive(true); // Torna o ícone visível
                 break;
             }
-            else if (collider.CompareTag("Pá")) // Verifica se é uma pá
+            else if (collider.CompareTag("Pá"))
             {
-                // Pegar a pá
                 pá = collider.gameObject;
-                pá.SetActive(false); // Desativa a pá
+                pá.SetActive(false);
                 Debug.Log("Pá pegada!");
-                // Execute qualquer lógica adicional aqui, se necessário
                 papegado = true;
                 break;
             }
-            if(collider.CompareTag("item2"))
+            else if (collider.CompareTag("item2"))
             {
                 item2 = collider.gameObject;
                 item2.SetActive(false);
                 Debug.Log("item2 pegado");
-
                 itempegado2 = true;
                 break;
             }
-            if (collider.CompareTag("Chave"))
+            else if (collider.CompareTag("Chave"))
             {
                 chave = collider.gameObject;
                 chave.SetActive(false);
@@ -223,14 +206,12 @@ public class jogador : MonoBehaviour
                 chavePegada = true;
                 break;
             }
-
         }
     }
 
-
     void Attack()
     {
-        if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado antes de permitir o ataque
+        if (!PauseMenu.isPaused)
         {
             Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
@@ -259,38 +240,13 @@ public class jogador : MonoBehaviour
         }
         StartCoroutine(DesativarObjetoDeAtaque());
     }
+
     IEnumerator DesativarObjetoDeAtaque()
     {
-        // Aguardar um curto período de tempo antes de desativar o objeto de ataque
-        yield return new WaitForSeconds(0.1f); // Ajuste o tempo conforme necessário
-
-        // Desativar o objeto de ataque
+        yield return new WaitForSeconds(0.1f);
         objetoDeAtaque.SetActive(false);
     }
-    /*
-    void Shoot()
-    {
-        if (!PauseMenu.isPaused) // Verifica se o jogo não está pausado antes de permitir o tiro
-        {
-            Vector3 spawnPosition;
 
-            if (lastDirection > 0)
-            {
-                spawnPosition = bulletSpawnPointRight.position;
-            }
-            else
-            {
-                spawnPosition = bulletSpawnPointLeft.position;
-            }
-
-            GameObject bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
-
-            Vector2 shootDirection = lastDirection > 0 ? Vector2.right : Vector2.left;
-
-            bullet.GetComponent<Rigidbody2D>().AddForce(shootDirection * velocidade_tiro, ForceMode2D.Impulse);
-        }
-    }
-    */
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
@@ -300,38 +256,29 @@ public class jogador : MonoBehaviour
         {
             Die();
         }
-
     }
+
     void Die()
     {
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public IEnumerator TransicaoParaProximaCena()
     {
-        // Gradualmente aumenta a opacidade da imagem de transição
         float tempoDecorrido = 0f;
         while (tempoDecorrido < tempoDeTransicao)
         {
-            // Calcula o progresso da transição
             float progresso = tempoDecorrido / tempoDeTransicao;
-
-            // Interpola a opacidade da cor da imagem
             Color cor = imagemTransicao.color;
             cor.a = Mathf.Lerp(0f, 1f, progresso);
             imagemTransicao.color = cor;
-
-            // Atualiza o tempo decorrido
             tempoDecorrido += Time.deltaTime;
             yield return null;
         }
 
-        
         Color corFinal = imagemTransicao.color;
         corFinal.a = 1f;
         imagemTransicao.color = corFinal;
-
-        
         SceneManager.LoadScene(proximaCena);
     }
 
@@ -341,7 +288,6 @@ public class jogador : MonoBehaviour
         {
             isGrounded = true;
         }
-        
     }
 
     void OnCollisionExit2D(Collision2D other)
@@ -351,22 +297,18 @@ public class jogador : MonoBehaviour
             isGrounded = false;
         }
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("balainimigo"))
         {
-            Destroy(collision.gameObject); // Destrua a bala inimiga
-            TakeDamage(danorecibido); // Cause dano ao jogador
-
+            Destroy(collision.gameObject);
+            TakeDamage(danorecibido);
         }
-        if (collision.CompareTag("fim")) // Verifica se colidiu com o objeto de fim do jogo
+        if (collision.CompareTag("fim"))
         {
             if (itemPegado)
             {
-                //fimObjeto.SetActive(true);
-                //Time.timeScale = 0f;
-
-                // Inicia a cor da imagem de transição com alpha 0
                 Color corInicial = imagemTransicao.color;
                 corInicial.a = 0f;
                 imagemTransicao.color = corInicial;
@@ -374,39 +316,34 @@ public class jogador : MonoBehaviour
             }
             else
             {
-                StartCoroutine(ShowAviso("Você precisa pegar o mapa de tesouro primeiro!")); // Exibe o aviso ao jogador
+                StartCoroutine(ShowAviso("Você precisa pegar o mapa de tesouro primeiro!"));
             }
         }
-        if (collision.CompareTag("fim2")) // Verifica se colidiu com o objeto de fim 2 do jogo
+        if (collision.CompareTag("fim2"))
         {
-            if (itemPegado && itempegado2) // Verifica se ambos os itens foram pegos
+            if (itemPegado && itempegado2)
             {
                 StartCoroutine(TransicaoParaProximaCena());
             }
             else
             {
-                StartCoroutine(ShowAviso("Você precisa pegar ambos os mapas de tesouro  primeiro!")); // Exibe o aviso ao jogador
+                StartCoroutine(ShowAviso("Você precisa pegar ambos os mapas de tesouro primeiro!"));
             }
         }
         if (collision.CompareTag("escada"))
         {
             escadas = true;
         }
-       
-
-
-
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Alcapao"))
         {
             if (chavePegada && inpute)
             {
-                // Abra o alçapão
                 alcapao.SetActive(false);
                 Debug.Log("Alçapão aberto!");
-                // Adicione aqui qualquer lógica adicional, como transição de cena, por exemplo
             }
             else if (!chavePegada)
             {
@@ -414,6 +351,7 @@ public class jogador : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerExit2D(Collider2D col)
     {
         if (col.CompareTag("escada"))
@@ -422,31 +360,30 @@ public class jogador : MonoBehaviour
             escalando = false;
         }
     }
+
     public void IniciarTransicao()
     {
         StartCoroutine(TransicaoParaProximaCena());
     }
+
     private void FixedUpdate()
     {
+        if (escalando == true)
         {
-            if (escalando == true)
-            {
-                playerrb.gravityScale = 0f;
-                playerrb.velocity = new Vector2(playerrb.velocity.x, vertical * velociadeescada);
-            }
-
-            else
-            {
-                playerrb.gravityScale = 10f;
-            }
+            playerrb.gravityScale = 0f;
+            playerrb.velocity = new Vector2(playerrb.velocity.x, vertical * velociadeescada);
+        }
+        else
+        {
+            playerrb.gravityScale = 10f;
         }
     }
+
     IEnumerator ShowAviso(string mensagem)
     {
-        avisoText.text = mensagem; // Define o texto do aviso
-        avisoText.gameObject.SetActive(true); // Ativa o objeto de texto
-        yield return new WaitForSeconds(2f); // Aguarda 2 segundos
-        avisoText.gameObject.SetActive(false); // Desativa o objeto de texto
+        avisoText.text = mensagem;
+        avisoText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        avisoText.gameObject.SetActive(false);
     }
-    
 }

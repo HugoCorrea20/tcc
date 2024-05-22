@@ -15,12 +15,12 @@ public class jaquatirica : MonoBehaviour
     public int danorecibido = 10;
     public float damageInterval = 5f; // Intervalo de dano
 
-
     public Transform heatlhbar;
     public GameObject heatltbarobject;
     private Vector3 heatltbarScale;
     private float heathpercent;
     public float alcanceDetecao = 5;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -28,7 +28,6 @@ public class jaquatirica : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
 
         player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
-
     }
 
     void Update()
@@ -40,12 +39,20 @@ public class jaquatirica : MonoBehaviour
             if (transform.position.x <= limiteEsquerdo)
             {
                 direcao = 1;
-                transform.localScale = new Vector3(1, 1, 1);
+
             }
             else if (transform.position.x >= limiteDireito)
             {
                 direcao = -1;
+
+            }
+            if (direcao == 1)
+            {
                 transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (direcao == -1)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
             }
 
             // Verifica se o jogador está dentro do alcance de detecção
@@ -67,7 +74,24 @@ public class jaquatirica : MonoBehaviour
             {
                 isAlert = false;
             }
+            if (direcao == 1)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (direcao == -1)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            if (player.position.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (player.position.x > transform.position.x)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
         }
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -80,12 +104,12 @@ public class jaquatirica : MonoBehaviour
         }
     }
 
-
     void UpdateHealthbar()
     {
         heatltbarScale.x = heathpercent * currentHealth;
         heatlhbar.localScale = heatltbarScale;
     }
+
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;

@@ -47,8 +47,10 @@ public class jogador : MonoBehaviour
     public bool chavePegada = false;
     public float alcanceMaximo = 1f;
     public bool inpute = false;
-
     public Image itemIcon; // Referência ao componente Image na UI para exibir o ícone do item
+    public Image Item2icon;
+    public Image paicon;
+    public Image chavicone;
 
     void Start()
     {
@@ -59,6 +61,8 @@ public class jogador : MonoBehaviour
         animator = GetComponent<Animator>(); // Obtém o componente Animator
 
         itemIcon.gameObject.SetActive(false); // Inicialmente invisível
+        Item2icon.gameObject.SetActive(false);
+        chavicone.gameObject.SetActive(false);
     }
 
     void UpdateHealthbar()
@@ -188,6 +192,9 @@ public class jogador : MonoBehaviour
                 pá.SetActive(false);
                 Debug.Log("Pá pegada!");
                 papegado = true;
+
+                paicon.sprite = pá.GetComponent<SpriteRenderer>().sprite;
+                paicon.gameObject.SetActive(true);
                 break;
             }
             else if (collider.CompareTag("item2"))
@@ -196,6 +203,9 @@ public class jogador : MonoBehaviour
                 item2.SetActive(false);
                 Debug.Log("item2 pegado");
                 itempegado2 = true;
+
+                Item2icon.sprite = item2.GetComponent<SpriteRenderer>().sprite;
+                Item2icon.gameObject.SetActive(true);
                 break;
             }
             else if (collider.CompareTag("Chave"))
@@ -204,6 +214,9 @@ public class jogador : MonoBehaviour
                 chave.SetActive(false);
                 Debug.Log("Chave pegada!");
                 chavePegada = true;
+
+                chavicone.sprite = chave.GetComponent<SpriteRenderer>().sprite;
+                chavicone.gameObject.SetActive(true);
                 break;
             }
         }

@@ -52,6 +52,7 @@ public class SceneLoader : MonoBehaviour
             float progresso2 = Mathf.Clamp01(operation.progress / 0.9f) * 100;
 
             Slloading.value = operation.progress;
+            if (progresso >= 100) progresso = 100;
             textporcetagem.text = progresso + "%";
 
             yield return null;
@@ -76,7 +77,7 @@ public class SceneLoader : MonoBehaviour
             
 
             Slloading.value =progresso2;
-           
+            if (progresso >= 100) progresso = 100;
             textporcetagem.text = ((int)progresso) + "%";
             
             yield return new WaitForSeconds(0.8f);

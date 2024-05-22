@@ -39,11 +39,19 @@ public class jacare : MonoBehaviour
             if (transform.position.x <= limiteEsquerdo)
             {
                 direcao = 1;
-                transform.localScale = new Vector3(-1, 1, 1);
+               
             }
             else if (transform.position.x >= limiteDireito)
             {
                 direcao = -1;
+            
+            }
+            if (direcao == 1)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (direcao == -1)
+            {
                 transform.localScale = new Vector3(1, 1, 1);
             }
 
@@ -66,7 +74,24 @@ public class jacare : MonoBehaviour
             {
                 isAlert = false;
             }
+           if (direcao ==1 )
+            {
+                transform.localScale = new Vector3( -1, 1, 1);
+            }
+           else if (direcao ==-1 )
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+           if (player.position.x < transform.position.x) 
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+           else if(player.position.x > transform.position.x)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
         }
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)

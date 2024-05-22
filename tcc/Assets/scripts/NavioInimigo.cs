@@ -19,7 +19,7 @@ public class NavioInimigo : MonoBehaviour
     private GameObject jogador;
     private bool movendoDireita = true;
     private bool atirando = false;
-    public float tempodetiro= 20f;
+    public float tempodetiro = 20f;
     public float shootCooldown = 5;
     public int danorecibido = 10;
     public Transform heatlhbar; //barra verde
@@ -36,11 +36,13 @@ public class NavioInimigo : MonoBehaviour
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
     }
+
     void UpdateHealthbar()
     {
         heatltbarScale.x = heathpercent * currentHealth;
         heatlhbar.localScale = heatltbarScale;
     }
+
     void Update()
     {
         if (!atirando) // Continua o movimento apenas se não estiver atirando
@@ -106,6 +108,15 @@ public class NavioInimigo : MonoBehaviour
 
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
+            Vector3 playerDirection = jogador.transform.position - transform.position;
+            if (playerDirection.x > 0 && transform.localScale.x < 0) // Jogador está à direita, mas o navio está virado para a esquerda
+            {
+                Flip();
+            }
+            else if (playerDirection.x < 0 && transform.localScale.x > 0) // Jogador está à esquerda, mas o navio está virado para a direita
+            {
+                Flip();
+            }
             return true;
         }
         return false;

@@ -64,9 +64,16 @@ public class jogador : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
         animator = GetComponent<Animator>(); // Obtém o componente Animator
 
-        itemIcon.gameObject.SetActive(false); // Inicialmente invisível
-        Item2icon.gameObject.SetActive(false);
-        chavicone.gameObject.SetActive(false);
+        itemIcon.gameObject.SetActive(false);
+         if(Item2icon != null ) 
+        {
+            Item2icon.gameObject.SetActive(false);
+        }
+        if(chavicone  != null ) 
+        {
+            chavicone.gameObject.SetActive(false);
+        }
+       
     }
 
     void UpdateHealthbar()
@@ -94,18 +101,22 @@ public class jogador : MonoBehaviour
                 {
                     PickupItem();
                 }
-                if (Vector2.Distance(transform.position, alcapao.transform.position) < alcanceMaximo)
+                if(alcapao != null)
                 {
-                    if (chavePegada)
+                    if (Vector2.Distance(transform.position, alcapao.transform.position) < alcanceMaximo)
                     {
-                        alcapao.SetActive(false);
-                        Debug.Log("Alçapão aberto!");
-                    }
-                    else
-                    {
-                        StartCoroutine(ShowAviso("Você precisa da chave para abrir o alçapão!"));
+                        if (chavePegada)
+                        {
+                            alcapao.SetActive(false);
+                            Debug.Log("Alçapão aberto!");
+                        }
+                        else
+                        {
+                            StartCoroutine(ShowAviso("Você precisa da chave para abrir o alçapão!"));
+                        }
                     }
                 }
+               
                 inpute = true;
             }
             if (Input.GetKeyUp(KeyCode.E))

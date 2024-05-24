@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/cena4.unity
     guid: 9c690e0e5c88e0d4cb956c36c7ca7eb0
   - enabled: 1
+    path: Assets/Scenes/cena5.unity
+    guid: 1f93fc390164a1e4683291e58dd05531
+  - enabled: 1
     path: Assets/Scenes/loading.unity
     guid: bba5e0dd459412649b2cd5cdfa1fcdfd
   - enabled: 1
@@ -32,6 +35,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/loading 3.unity
     guid: 11c137d05729fa347b8a2d16282b3288
+  - enabled: 1
+    path: Assets/Scenes/loading 4.unity
+    guid: b04565e98f3d77f478f78834be932b0c
   - enabled: 1
     path: Assets/Scenes/fimdejogo.unity
     guid: 49e5b369aa085f146b27059e1a2766ed

@@ -51,6 +51,10 @@ public class jogador : MonoBehaviour
     public Image Item2icon;
     public Image paicon;
     public Image chavicone;
+    public GameObject chaofalso;
+    public bool ativarMortePorChao = false;
+
+
 
     void Start()
     {
@@ -300,14 +304,27 @@ public class jogador : MonoBehaviour
         if (other.gameObject.CompareTag("Chao"))
         {
             isGrounded = true;
+            if (ativarMortePorChao)
+            {
+                Die();
+            }
+        }
+        if (other.gameObject.CompareTag("chaofalso"))
+        {
+            isGrounded = true;
         }
     }
+     
 
     void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Chao"))
         {
             isGrounded = false;
+        }
+        if(other.gameObject.CompareTag("chaofalso"))
+        {
+            isGrounded= false;
         }
     }
 

@@ -46,7 +46,7 @@ public class TrocarCena : MonoBehaviour
         introdução.SetActive(true);
         texto1.SetActive(true);
         começarbtn.SetActive(false);
-        proximofalar1btn.SetActive(true);
+        começarbtn.SetActive(true);
     }
     public void falar2()
     {
@@ -64,18 +64,21 @@ public class TrocarCena : MonoBehaviour
     }
     public void tutorialjason()
     {
-        menuprincipal.SetActive(false);
+        
         tutirialJason.SetActive(true);
+        tutirialnavio.SetActive(false);
     }
     public void tutorialnavio()
     {
         tutirialJason.SetActive(false);
+        menuprincipal.SetActive (false);
         tutirialnavio.SetActive(true);
     }
     public void sairtutorial()
     {
         tutirialnavio.SetActive(false);
         menuprincipal.SetActive(true);
+       tutirialJason .SetActive(false);
     }
 
 }

@@ -11,6 +11,7 @@ public class jogador : MonoBehaviour
     public float speed = 5f;
     public float jumpForce = 10f;
     private Rigidbody2D rb;
+
     private bool isGrounded;
     private float lastDirection = 1f;
     public float attackRange = 1.5f; // Ajuste a distância de ataque conforme necessário
@@ -302,6 +303,7 @@ public class jogador : MonoBehaviour
             imagemTransicao.color = cor;
             tempoDecorrido += Time.deltaTime;
             yield return null;
+            Debug.Log("ensostou");
         }
 
         Color corFinal = imagemTransicao.color;
@@ -360,11 +362,16 @@ public class jogador : MonoBehaviour
                 StartCoroutine(ShowAviso("Você precisa pegar o mapa de tesouro primeiro!"));
             }
         }
-        if (collision.CompareTag("fim2"))
+       else  if (collision.CompareTag("fim2"))
         {
             if (itemPegado && itempegado2)
             {
+                Color corInicial = imagemTransicao.color;
+                corInicial.a = 0f;
+                imagemTransicao.color = corInicial;
+                Debug.Log("ensostou");
                 StartCoroutine(TransicaoParaProximaCena());
+               
             }
             else
             {

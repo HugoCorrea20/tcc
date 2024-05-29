@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
     public void Tutorial()
     {
         tutorial.SetActive(true);
-        pauseMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
     }
     public void SairTutorial()
     {

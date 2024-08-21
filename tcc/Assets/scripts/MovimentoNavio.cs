@@ -9,7 +9,7 @@ public class MovimentoNavio : MonoBehaviour
     public GameObject balaPrefab; // Prefab da bala
     public Transform pontoDeSpawn; // Ponto de spawn da bala
     public float velocidadeBala = 10f; // Velocidade da bala
-
+    public AudioSource tirodocanhao;
     private float tempoUltimoTiro;
     private bool primeiroTiroDisparado = false;
     public float tempotiro = 3f;
@@ -61,6 +61,7 @@ public class MovimentoNavio : MonoBehaviour
     {
         GameObject bala = Instantiate(balaPrefab, pontoDeSpawn.position, pontoDeSpawn.rotation);
         bala.GetComponent<Rigidbody2D>().velocity = transform.right * velocidadeBala;
+        tirodocanhao.Play();
     }
 
     

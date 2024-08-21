@@ -53,6 +53,9 @@ public class jogador : MonoBehaviour
     public Image paicon;
     public Image chavicone;
     public GameObject chaofalso;
+    public AudioSource movementSound;
+    public AudioSource stairSound;
+
     public bool ativarMortePorChao = false;
 
 
@@ -74,7 +77,15 @@ public class jogador : MonoBehaviour
         {
             chavicone.gameObject.SetActive(false);
         }
-       
+        if (movementSound != null)
+        {
+            movementSound.loop = true; // O som deve repetir enquanto o jogador estiver se movendo
+        }
+        if (stairSound != null)
+        {
+            stairSound.loop = true; // O som deve repetir enquanto o jogador estiver subindo/descendo escadas
+        }
+
     }
 
     void UpdateHealthbar()
@@ -129,6 +140,7 @@ public class jogador : MonoBehaviour
             if (escadas && Mathf.Abs(vertical) > 0f)
             {
                 escalando = true;
+
             }
         }
     }
@@ -167,15 +179,28 @@ public class jogador : MonoBehaviour
         {
             animator.SetBool("movendo", true);
             animator.SetBool("parado", false);
+
+            // Toca o som de movimento se não estiver tocando
+            if (movementSound != null && !movementSound.isPlaying)
+            {
+                movementSound.Play();
+            }
         }
         else
         {
             animator.SetBool("movendo", false);
             animator.SetBool("parado", !wasMoving);
+
+            // Para o som de movimento se estiver tocando
+            if (movementSound != null && movementSound.isPlaying)
+            {
+                movementSound.Stop();
+            }
         }
 
         wasMoving = isMoving;
     }
+
 
     void Flip()
     {
@@ -420,12 +445,25 @@ public class jogador : MonoBehaviour
         {
             playerrb.gravityScale = 0f;
             playerrb.velocity = new Vector2(playerrb.velocity.x, vertical * velociadeescada);
+
+            // Toca o som da escada se não estiver tocando
+            if (stairSound != null && !stairSound.isPlaying)
+            {
+                stairSound.Play();
+            }
         }
         else
         {
             playerrb.gravityScale = 10f;
+
+            // Para o som da escada se estiver tocando
+            if (stairSound != null && stairSound.isPlaying)
+            {
+                stairSound.Stop();
+            }
         }
     }
+
 
     IEnumerator ShowAviso(string mensagem)
     {
@@ -434,4 +472,5 @@ public class jogador : MonoBehaviour
         yield return new WaitForSeconds(2f);
         avisoText.gameObject.SetActive(false);
     }
+
 }

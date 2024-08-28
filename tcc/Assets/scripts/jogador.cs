@@ -55,6 +55,7 @@ public class jogador : MonoBehaviour
     public GameObject chaofalso;
     public AudioSource movementSound;
     public AudioSource stairSound;
+    public AudioSource alçapãosource;
 
     public bool ativarMortePorChao = false;
 
@@ -130,6 +131,14 @@ public class jogador : MonoBehaviour
                 }
                
                 inpute = true;
+            }
+            if (escalando==true && Input.GetAxis("Vertical") !=0)
+            {
+                stairSound.volume = 1;
+            }
+            else if(escalando==true )
+            {
+                stairSound.volume = 0;
             }
             if (Input.GetKeyUp(KeyCode.E))
             {
@@ -417,6 +426,7 @@ public class jogador : MonoBehaviour
             {
                 alcapao.SetActive(false);
                 Debug.Log("Alçapão aberto!");
+                alçapãosource.Play();
             }
             else if (!chavePegada)
             {

@@ -56,6 +56,7 @@ public class jogador : MonoBehaviour
     public AudioSource movementSound;
     public AudioSource stairSound;
     public AudioSource alçapãosource;
+    public AudioSource cavarSound;
 
     public bool ativarMortePorChao = false;
 
@@ -156,10 +157,16 @@ public class jogador : MonoBehaviour
 
     void Cavar()
     {
+        if (cavarSound != null)
+        {
+            cavarSound.Play();
+        }
+
         localcavar.SetActive(false);
         item.SetActive(true);
         Debug.Log("Item coletado após cavar!");
     }
+
 
     void MovimentarJogador()
     {

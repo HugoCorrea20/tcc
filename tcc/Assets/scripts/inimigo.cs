@@ -24,6 +24,7 @@ public class inimigo : MonoBehaviour
 
     private Vector3 heatltbarScale; //tamanho da barra
     private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
+    public AudioSource tirosom;
 
     void Start()
     {
@@ -87,7 +88,7 @@ public class inimigo : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1); // Sem flip (direita)
                 currentFirePoint = firePointRight;
             }
-
+            tirosom.Play();
             // Instancia a bala
             GameObject bullet = Instantiate(bulletPrefab, currentFirePoint.position, currentFirePoint.rotation);
 

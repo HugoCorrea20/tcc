@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class jaquatirica : MonoBehaviour
@@ -14,13 +13,14 @@ public class jaquatirica : MonoBehaviour
     public float limiteDireito = 5f;
     public int danorecibido = 10;
     public float damageInterval = 5f; // Intervalo de dano
+    private bool playerInContact = false; // Verifica se o jogador está em contato
 
     public Transform heatlhbar;
     public GameObject heatltbarobject;
     private Vector3 heatltbarScale;
     private float heathpercent;
     public float alcanceDetecao = 5;
-
+    public AudioSource alertSound;
     void Start()
     {
         currentHealth = maxHealth;
@@ -39,13 +39,12 @@ public class jaquatirica : MonoBehaviour
             if (transform.position.x <= limiteEsquerdo)
             {
                 direcao = 1;
-
             }
             else if (transform.position.x >= limiteDireito)
             {
                 direcao = -1;
-
             }
+
             if (direcao == 1)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
@@ -60,6 +59,7 @@ public class jaquatirica : MonoBehaviour
             if (distanceToPlayer < alcanceDetecao) // Verifica se o jogador está dentro do alcance de detecção
             {
                 isAlert = true;
+                alertSound.Play();
             }
         }
         else
@@ -74,6 +74,7 @@ public class jaquatirica : MonoBehaviour
             {
                 isAlert = false;
             }
+
             if (direcao == 1)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
@@ -82,6 +83,7 @@ public class jaquatirica : MonoBehaviour
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
+
             if (player.position.x < transform.position.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
@@ -91,16 +93,24 @@ public class jaquatirica : MonoBehaviour
                 transform.localScale = new Vector3(-1, 1, 1);
             }
         }
-
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Verifica se o jacaré colidiu com o jogador
-        if (collision.gameObject.CompareTag("Player"))
+        
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+       
+    }
+
+    IEnumerator CauseDamagePeriodically(jogador player)
+    {
+        while (playerInContact)
         {
-            // Causa dano ao jogador
-            collision.gameObject.GetComponent<jogador>().TakeDamage(danorecibido);
+            player.TakeDamage(danorecibido);
+            yield return new WaitForSeconds(damageInterval);
         }
     }
 
@@ -132,6 +142,21 @@ public class jaquatirica : MonoBehaviour
         {
             Destroy(collision.gameObject);
             TakeDamage(danorecibido);
+        }
+        // Verifica se a jaguatirica colidiu com o jogador
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInContact = true;
+            StartCoroutine(CauseDamagePeriodically(collision.gameObject.GetComponent<jogador>()));
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Verifica se a jaguatirica saiu da colisão com o jogador
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInContact = false;
+            StopCoroutine(CauseDamagePeriodically(collision.gameObject.GetComponent<jogador>()));
         }
     }
 }

@@ -57,6 +57,9 @@ public class jogador : MonoBehaviour
     public AudioSource stairSound;
     public AudioSource alçapãosource;
     public AudioSource cavarSound;
+    public AudioSource espadasom;
+    public AudioSource jumpSound;
+    public AudioSource damagesound; 
 
     public bool ativarMortePorChao = false;
 
@@ -87,6 +90,11 @@ public class jogador : MonoBehaviour
         {
             stairSound.loop = true; // O som deve repetir enquanto o jogador estiver subindo/descendo escadas
         }
+        // Certifique-se de que o jumpSound está atribuído
+        if (jumpSound == null)
+        {
+            Debug.LogWarning("Jump sound is not assigned.");
+        }
 
     }
 
@@ -104,6 +112,7 @@ public class jogador : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse para ataque de perto
             {
                 Attack();
+                espadasom.Play();
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -184,7 +193,13 @@ public class jogador : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
+            // Tocar o som de pulo
+            if (jumpSound != null)
+            {
+                jumpSound.Play();
+            }
         }
+       
     }
 
     void UpdateAnimations()
@@ -291,6 +306,7 @@ public class jogador : MonoBehaviour
                 if (collider.CompareTag("Inimigo"))
                 {
                     collider.GetComponent<inimigo>().TakeDamage(10);
+                    
                 }
             }
             foreach (Collider2D collider in colliders)
@@ -321,6 +337,7 @@ public class jogador : MonoBehaviour
     {
         currentHealth -= damageAmount;
         UpdateHealthbar();
+        damagesound.Play();
 
         if (currentHealth <= 0)
         {

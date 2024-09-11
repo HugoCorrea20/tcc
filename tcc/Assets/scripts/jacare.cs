@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class jacare : MonoBehaviour
@@ -14,12 +13,15 @@ public class jacare : MonoBehaviour
     public float limiteDireito = 5f;
     public int danorecibido = 10;
     public float damageInterval = 5f; // Intervalo de dano
+    private bool playerInContact = false; // Verifica se o jogador está em contato
 
     public Transform heatlhbar;
     public GameObject heatltbarobject;
     private Vector3 heatltbarScale;
     private float heathpercent;
     public float alcanceDetecao = 5;
+
+    public AudioSource alertSound; // Referência ao AudioSource
 
     void Start()
     {
@@ -28,6 +30,7 @@ public class jacare : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
 
         player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
+      
     }
 
     void Update()
@@ -39,13 +42,12 @@ public class jacare : MonoBehaviour
             if (transform.position.x <= limiteEsquerdo)
             {
                 direcao = 1;
-               
             }
             else if (transform.position.x >= limiteDireito)
             {
                 direcao = -1;
-            
             }
+
             if (direcao == 1)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
@@ -60,6 +62,7 @@ public class jacare : MonoBehaviour
             if (distanceToPlayer < alcanceDetecao) // Verifica se o jogador está dentro do alcance de detecção
             {
                 isAlert = true;
+                alertSound.Play(); // Toca o som quando o jogador é detectado
             }
         }
         else
@@ -74,33 +77,35 @@ public class jacare : MonoBehaviour
             {
                 isAlert = false;
             }
-           if (direcao ==1 )
+
+            if (direcao == 1)
             {
-                transform.localScale = new Vector3( -1, 1, 1);
+                transform.localScale = new Vector3(-1, 1, 1);
             }
-           else if (direcao ==-1 )
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-           if (player.position.x < transform.position.x) 
+            else if (direcao == -1)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
-           else if(player.position.x > transform.position.x)
+
+            if (player.position.x < transform.position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (player.position.x > transform.position.x)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }
         }
-
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+  
+
+    IEnumerator CauseDamagePeriodically(jogador player)
     {
-        // Verifica se o jacaré colidiu com o jogador
-        if (collision.gameObject.CompareTag("Player"))
+        while (playerInContact)
         {
-            // Causa dano ao jogador
-            collision.gameObject.GetComponent<jogador>().TakeDamage(danorecibido);
+            player.TakeDamage(danorecibido);
+            yield return new WaitForSeconds(damageInterval);
         }
     }
 
@@ -132,6 +137,21 @@ public class jacare : MonoBehaviour
         {
             Destroy(collision.gameObject);
             TakeDamage(danorecibido);
+        }
+        // Verifica se o jacaré colidiu com o jogador
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInContact = true;
+            StartCoroutine(CauseDamagePeriodically(collision.gameObject.GetComponent<jogador>()));
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Verifica se o jacaré saiu da colisão com o jogador
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerInContact = false;
+            StopCoroutine(CauseDamagePeriodically(collision.gameObject.GetComponent<jogador>()));
         }
     }
 }

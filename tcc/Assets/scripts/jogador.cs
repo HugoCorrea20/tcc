@@ -59,8 +59,8 @@ public class jogador : MonoBehaviour
     public AudioSource cavarSound;
     public AudioSource espadasom;
     public AudioSource jumpSound;
-    public AudioSource damagesound; 
-
+    public AudioSource damagesound;
+    public float gravidade = 7f;
     public bool ativarMortePorChao = false;
 
 
@@ -488,7 +488,7 @@ public class jogador : MonoBehaviour
         }
         else
         {
-            playerrb.gravityScale = 10f;
+            playerrb.gravityScale = gravidade;
 
             // Para o som da escada se estiver tocando
             if (stairSound != null && stairSound.isPlaying)

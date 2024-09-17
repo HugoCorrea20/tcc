@@ -5078,7 +5078,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022513084}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.012062862, y: 0.000089049485, z: -0.0000010742697, w: 0.9999273}
+  m_LocalRotation: {x: 0.012062862, y: 0.000089083915, z: -0.0000010746851, w: 0.9999273}
   m_LocalPosition: {x: -20.89, y: 5.594, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6408,7 +6408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325579780}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.012062862, y: 0.000089049485, z: -0.0000010742697, w: 0.9999273}
+  m_LocalRotation: {x: 0.012062862, y: 0.000089083915, z: -0.0000010746851, w: 0.9999273}
   m_LocalPosition: {x: -20.89178, y: 5.0653095, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6764,7 +6764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecc29b1ca888704e8943ba2615e201f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 110
   currentHealth: 0
   velocidade: 2
   limiteEsquerdo: 30
@@ -6778,7 +6778,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   maxDistance: 10
-  danorecibido: 10
+  danorecibido: 15
   heatlhbar: {fileID: 404130636}
   heatltbarobject: {fileID: 132169207}
   tirosom: {fileID: 818632420}
@@ -9069,7 +9069,7 @@ Transform:
   m_GameObject: {fileID: 1743706492}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: -0.54, z: 0}
+  m_LocalPosition: {x: 0.75, y: -0.114, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9549,8 +9549,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1238416507}
     - target: {fileID: 795609667991148914, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
+      propertyPath: maxHealth
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 795609667991148914, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: danorecibido
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 795609667991148914, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: firePointLeft
@@ -9573,8 +9577,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1506923369}
     - target: {fileID: 2787683666982791318, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2787683666982791318, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.04
+      value: 0.137
       objectReference: {fileID: 0}
     - target: {fileID: 3586146398333991985, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11207,6 +11215,14 @@ PrefabInstance:
       propertyPath: tirosom
       value: 
       objectReference: {fileID: 818632420}
+    - target: {fileID: 795609667991148914, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
+      propertyPath: maxHealth
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 795609667991148914, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
+      propertyPath: danorecibido
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2787683666982791318, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.08

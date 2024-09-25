@@ -62,6 +62,8 @@ public class jogador : MonoBehaviour
     public AudioSource damagesound;
     public float gravidade = 7f;
     public bool ativarMortePorChao = false;
+    public GameObject texto;
+    public GameObject textopá;
 
 
 
@@ -404,6 +406,7 @@ public class jogador : MonoBehaviour
         if (collision.gameObject.CompareTag("balainimigo"))
         {
             Destroy(collision.gameObject);
+            if(Vector2.Distance(collision.gameObject.transform.position,transform.position ) <1.0f)
             TakeDamage(danorecibido);
         }
         if (collision.CompareTag("fim"))
@@ -420,7 +423,11 @@ public class jogador : MonoBehaviour
                 StartCoroutine(ShowAviso("Você precisa pegar o mapa de tesouro primeiro!"));
             }
         }
-       else  if (collision.CompareTag("fim2"))
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            texto.SetActive(true);
+        }
+        else  if (collision.CompareTag("fim2"))
         {
             if (itemPegado && itempegado2)
             {
@@ -457,6 +464,7 @@ public class jogador : MonoBehaviour
                 StartCoroutine(ShowAviso("Você precisa da chave para abrir o alçapão!"));
             }
         }
+        
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -465,6 +473,10 @@ public class jogador : MonoBehaviour
         {
             escadas = false;
             escalando = false;
+        }
+        if (col.gameObject.CompareTag("Item"))
+        {
+            texto.SetActive(false);
         }
     }
 

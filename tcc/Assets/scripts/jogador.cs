@@ -29,7 +29,7 @@ public class jogador : MonoBehaviour
     public string proximaCena; // Nome da próxima cena a ser carregada
     public float tempoDeTransicao = 1f; // Tempo da transição
     public Image imagemTransicao; // Referência para a imagem de transição
-    private Animator animator; // Referência ao componente Animator
+    private  Animator animator; // Referência ao componente Animator
     public bool wasMoving = false; // Indica se o jogador estava se movendo no frame anterior
     public bool papegado = false;
     public Transform localCavar;
@@ -63,7 +63,9 @@ public class jogador : MonoBehaviour
     public float gravidade = 7f;
     public bool ativarMortePorChao = false;
     public GameObject texto;
-    public GameObject textopá;
+    public GameObject textopa;
+    public GameObject textochave;
+    public GameObject textoitem2;
 
 
 
@@ -73,6 +75,8 @@ public class jogador : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
+        texto.SetActive(false);
+        
         animator = GetComponent<Animator>(); // Obtém o componente Animator
 
         itemIcon.gameObject.SetActive(false);
@@ -91,6 +95,10 @@ public class jogador : MonoBehaviour
         if (stairSound != null)
         {
             stairSound.loop = true; // O som deve repetir enquanto o jogador estiver subindo/descendo escadas
+        }
+        if (textopa != null)
+        {
+            textopa.SetActive(false);
         }
         // Certifique-se de que o jumpSound está atribuído
         if (jumpSound == null)
@@ -426,6 +434,18 @@ public class jogador : MonoBehaviour
         if (collision.gameObject.CompareTag("Item"))
         {
             texto.SetActive(true);
+        }
+        if (collision.gameObject.CompareTag("Pá"))
+        {
+            textopa.SetActive(true);
+        }
+        if (collision.gameObject.CompareTag("item2"))
+        {
+            textoitem2.gameObject.SetActive(true);
+        }
+        if(collision.gameObject.CompareTag("Chave"))
+        {
+            textochave.SetActive(true);
         }
         else  if (collision.CompareTag("fim2"))
         {

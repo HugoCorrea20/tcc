@@ -20,6 +20,8 @@ TagManager:
   - Alcapao
   - chaofalso
   - espada
+  - navioinimigo
+  - ilhafinal
   layers:
   - Default
   - TransparentFX

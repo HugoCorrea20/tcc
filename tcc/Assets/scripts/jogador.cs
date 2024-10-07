@@ -66,7 +66,7 @@ public class jogador : MonoBehaviour
     public GameObject textopa;
     public GameObject textochave;
     public GameObject textoitem2;
-
+    public bool pulando;
 
 
     void Start()
@@ -208,40 +208,38 @@ public class jogador : MonoBehaviour
             {
                 jumpSound.Play();
             }
+            pulando = true;
+            animator.SetBool("pular", true);
         }
-       
     }
 
     void UpdateAnimations()
     {
         bool isMoving = Mathf.Abs(rb.velocity.x) > 0.01f;
 
-        if (isMoving)
+        if (isMoving && isGrounded)
         {
             animator.SetBool("movendo", true);
             animator.SetBool("parado", false);
+        }
+        else if (!isMoving && isGrounded)
+        {
+            animator.SetBool("movendo", false);
+            animator.SetBool("parado", true);
+        }
 
-            // Toca o som de movimento se não estiver tocando
-            if (movementSound != null && !movementSound.isPlaying)
-            {
-                movementSound.Play();
-            }
+        // Gerenciar transições entre animações de pulo e chão
+        if (!isGrounded)
+        {
+            animator.SetBool("pular", true);
         }
         else
         {
-            animator.SetBool("movendo", false);
-            animator.SetBool("parado", !wasMoving);
-
-            // Para o som de movimento se estiver tocando
-            if (movementSound != null && movementSound.isPlaying)
-            {
-                movementSound.Stop();
-            }
+            animator.SetBool("pular", false);
         }
 
         wasMoving = isMoving;
     }
-
 
     void Flip()
     {

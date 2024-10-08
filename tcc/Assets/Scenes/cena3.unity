@@ -12753,6 +12753,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 570952594}
     - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: textopa
+      value: 
+      objectReference: {fileID: 697377993}
+    - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
       propertyPath: itemIcon
       value: 
       objectReference: {fileID: 2130603675}

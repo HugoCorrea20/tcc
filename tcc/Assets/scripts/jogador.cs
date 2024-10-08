@@ -169,7 +169,7 @@ public class jogador : MonoBehaviour
             if (escadas && Mathf.Abs(vertical) > 0f)
             {
                 escalando = true;
-
+                animator.SetBool("pular", false);
             }
         }
     }
@@ -464,6 +464,7 @@ public class jogador : MonoBehaviour
         if (collision.CompareTag("escada"))
         {
             escadas = true;
+           
         }
     }
 

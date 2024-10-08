@@ -5107,7 +5107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022513084}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.009641332, y: 0.00016187414, z: 0.0000015607548, w: 0.9999535}
+  m_LocalRotation: {x: -0.009641322, y: 0.00016187414, z: 0.0000015607533, w: 0.9999535}
   m_LocalPosition: {x: -20.6737, y: 6.0264997, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6437,7 +6437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325579780}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.009641332, y: 0.00016187414, z: 0.0000015607548, w: 0.9999535}
+  m_LocalRotation: {x: -0.009641322, y: 0.00016187414, z: 0.0000015607533, w: 0.9999535}
   m_LocalPosition: {x: -20.676939, y: 5.0636463, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11526,6 +11526,10 @@ PrefabInstance:
       propertyPath: fimObjeto
       value: 
       objectReference: {fileID: 1414771167}
+    - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: gravidade
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
       propertyPath: heatlhbar
       value: 

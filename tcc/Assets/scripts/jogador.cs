@@ -36,7 +36,8 @@ public class jogador : MonoBehaviour
     public GameObject item;
     public GameObject item2;
     public bool itempegado2 = false;
-    public GameObject objetoDeAtaque;
+    
+
     private float vertical;
     private float velociadeescada = 8f;
     private bool escadas;
@@ -67,6 +68,7 @@ public class jogador : MonoBehaviour
     public GameObject textochave;
     public GameObject textoitem2;
     public bool pulando;
+    private bool isAttacking = false;
 
 
     void Start()
@@ -215,6 +217,8 @@ public class jogador : MonoBehaviour
 
     void UpdateAnimations()
     {
+        if (isAttacking) return; // Se estiver atacando, não atualiza outras animações
+
         bool isMoving = Mathf.Abs(rb.velocity.x) > 0.01f;
 
         if (isMoving && isGrounded)
@@ -240,6 +244,7 @@ public class jogador : MonoBehaviour
 
         wasMoving = isMoving;
     }
+
 
     void Flip()
     {
@@ -306,15 +311,15 @@ public class jogador : MonoBehaviour
     {
         if (!PauseMenu.isPaused)
         {
+            isAttacking = true; // Jogador está atacando
+            animator.SetBool("ataque", true);
             Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
-            objetoDeAtaque.SetActive(true);
             foreach (Collider2D collider in colliders)
             {
                 if (collider.CompareTag("Inimigo"))
                 {
                     collider.GetComponent<inimigo>().TakeDamage(10);
-                    
                 }
             }
             foreach (Collider2D collider in colliders)
@@ -335,10 +340,13 @@ public class jogador : MonoBehaviour
         StartCoroutine(DesativarObjetoDeAtaque());
     }
 
+
     IEnumerator DesativarObjetoDeAtaque()
     {
         yield return new WaitForSeconds(0.1f);
-        objetoDeAtaque.SetActive(false);
+        isAttacking = false; // Jogador parou de atacar
+        animator.SetBool("ataque", false);
+        UpdateAnimations(); // Atualiza as animações após o ataque
     }
 
     public void TakeDamage(int damageAmount)

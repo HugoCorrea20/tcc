@@ -975,9 +975,9 @@ GameObject:
   - component: {fileID: 189495726}
   - component: {fileID: 189495725}
   - component: {fileID: 189495724}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: "ch\xE3o"
-  m_TagString: Chao
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2517,7 +2517,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -32, y: -33.835327}
-  m_SizeDelta: {x: 743.3535, y: 104.4667}
+  m_SizeDelta: {x: 743.35, y: 104.4667}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &452977644
 MonoBehaviour:
@@ -12892,6 +12892,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8158926929101537730, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 20991e97f3474464f8513fa52f792314, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

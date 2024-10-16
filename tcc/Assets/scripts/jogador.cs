@@ -69,6 +69,8 @@ public class jogador : MonoBehaviour
     public GameObject textoitem2;
     public bool pulando;
     private bool isAttacking = false;
+    public AudioSource itemPickupSound;
+
 
 
     void Start()
@@ -213,7 +215,24 @@ public class jogador : MonoBehaviour
             pulando = true;
             animator.SetBool("pular", true);
         }
+
+        // Tocar som de passos
+        if (isGrounded && Mathf.Abs(moveHorizontal) > 0.01f)
+        {
+            if (movementSound != null && !movementSound.isPlaying)
+            {
+                movementSound.Play();
+            }
+        }
+        else
+        {
+            if (movementSound != null && movementSound.isPlaying)
+            {
+                movementSound.Pause();
+            }
+        }
     }
+
 
     void UpdateAnimations()
     {
@@ -269,6 +288,13 @@ public class jogador : MonoBehaviour
                 // Atualizar o ícone do item na UI
                 itemIcon.sprite = currentItem.GetComponent<SpriteRenderer>().sprite;
                 itemIcon.gameObject.SetActive(true); // Torna o ícone visível
+
+                // Tocar o som de pegar item
+                if (itemPickupSound != null)
+                {
+                    itemPickupSound.Play();
+                }
+
                 break;
             }
             else if (collider.CompareTag("Pá"))
@@ -280,6 +306,13 @@ public class jogador : MonoBehaviour
 
                 paicon.sprite = pá.GetComponent<SpriteRenderer>().sprite;
                 paicon.gameObject.SetActive(true);
+
+                // Tocar o som de pegar item
+                if (itemPickupSound != null)
+                {
+                    itemPickupSound.Play();
+                }
+
                 break;
             }
             else if (collider.CompareTag("item2"))
@@ -291,6 +324,13 @@ public class jogador : MonoBehaviour
 
                 Item2icon.sprite = item2.GetComponent<SpriteRenderer>().sprite;
                 Item2icon.gameObject.SetActive(true);
+
+                // Tocar o som de pegar item
+                if (itemPickupSound != null)
+                {
+                    itemPickupSound.Play();
+                }
+
                 break;
             }
             else if (collider.CompareTag("Chave"))
@@ -302,10 +342,18 @@ public class jogador : MonoBehaviour
 
                 chavicone.sprite = chave.GetComponent<SpriteRenderer>().sprite;
                 chavicone.gameObject.SetActive(true);
+
+                // Tocar o som de pegar item
+                if (itemPickupSound != null)
+                {
+                    itemPickupSound.Play();
+                }
+
                 break;
             }
         }
     }
+
 
     void Attack()
     {
@@ -403,18 +451,20 @@ public class jogador : MonoBehaviour
     }
      
 
-    void OnCollisionExit2D(Collision2D other)
+    /*void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Chao"))
         {
+           if(isGrounded)
             isGrounded = false;
         }
         if(other.gameObject.CompareTag("chaofalso"))
         {
+            if(isGrounded)
             isGrounded= false;
         }
     }
-
+    */
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("balainimigo"))

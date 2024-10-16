@@ -6,11 +6,19 @@ using UnityEngine.SceneManagement;
 public class fimdejogo : MonoBehaviour
 {
     public string menuprincipal;
+    public string nomemenu;
     public void Menuprincipal()
     {
-        SceneManager.LoadScene(menuprincipal);
+        nomemenu = menuprincipal;
+        //SceneManager.LoadScene(menuprincipal);
+        StartCoroutine("Abrir");
     }
+    private IEnumerator Abrir()
+    {
+        yield return new WaitForSeconds(0.5f);
 
+        SceneManager.LoadScene(nomemenu);
+    }
     public void SAIR()
     {
         Application.Quit();

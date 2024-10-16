@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject tutorial;
     public string menuprincipal;
+    public string nomemenu;
     public static bool isPaused = false;
 
     void Update()
@@ -51,9 +53,17 @@ public class PauseMenu : MonoBehaviour
     }
     public void Menuprincipal()
     {
-        SceneManager.LoadScene(menuprincipal);
+        nomemenu = menuprincipal;
+        //SceneManager.LoadScene(menuprincipal);
+        StartCoroutine("Abrir");
         isPaused = false;
         Time.timeScale = 1f;
+    }
+    private IEnumerator Abrir()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        SceneManager.LoadScene(nomemenu);
     }
 }
 

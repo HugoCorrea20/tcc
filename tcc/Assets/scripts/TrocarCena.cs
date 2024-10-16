@@ -18,11 +18,19 @@ public class TrocarCena : MonoBehaviour
     public GameObject proximofalar2btn;
     public GameObject tutirialJason;
     public GameObject tutirialnavio;
-   
+    public string nomeCena;
 
     public void TrocarParaCena()
     {
-        SceneManager.LoadScene(nomeDaCena);
+        nomeCena = nomeDaCena;
+        //SceneManager.LoadScene(nomeDaCena);
+        StartCoroutine("Abrir");
+    }
+    private IEnumerator Abrir()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        SceneManager.LoadScene(nomeCena);
     }
     public void SAIR()
     {

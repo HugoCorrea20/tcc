@@ -30,7 +30,7 @@ public class jaquatirica : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
 
-        // Inicialize o SpriteRenderer
+       
         originalcolor = spriteRenderer.material.color;
     }
 

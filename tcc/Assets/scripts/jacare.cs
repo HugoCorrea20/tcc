@@ -20,9 +20,9 @@ public class jacare : MonoBehaviour
     private Vector3 heatltbarScale;
     private float heathpercent;
     public float alcanceDetecao = 5;
-
+    private SpriteRenderer spriteRenderer;
     public AudioSource alertSound; // Referência ao AudioSource
-
+    Color originalcolor;
     void Start()
     {
         currentHealth = maxHealth;
@@ -30,7 +30,10 @@ public class jacare : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
 
         player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
-      
+        // Inicialize o SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalcolor = spriteRenderer.material.color;
+
     }
 
     void Update()
@@ -123,6 +126,21 @@ public class jacare : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+        StopCoroutine(BlinkRed());
+        StartCoroutine(BlinkRed());
+    }
+    IEnumerator BlinkRed()
+    {
+        
+        float blinkDuration = 0.1f; // Duração de cada "piscar"
+
+        for (int i = 0; i < 5; i++) // Piscar 5 vezes
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(blinkDuration);
+            spriteRenderer.color = originalcolor;
+            yield return new WaitForSeconds(blinkDuration);
         }
     }
 

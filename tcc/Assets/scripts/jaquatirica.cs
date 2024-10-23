@@ -14,13 +14,14 @@ public class jaquatirica : MonoBehaviour
     public int danorecibido = 10;
     public float damageInterval = 5f; // Intervalo de dano
     private bool playerInContact = false; // Verifica se o jogador está em contato
-
+    public  SpriteRenderer spriteRenderer;
     public Transform heatlhbar;
     public GameObject heatltbarobject;
     private Vector3 heatltbarScale;
     private float heathpercent;
     public float alcanceDetecao = 5;
     public AudioSource alertSound;
+    Color originalcolor;
     void Start()
     {
         currentHealth = maxHealth;
@@ -28,6 +29,9 @@ public class jaquatirica : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
 
         player = GameObject.FindGameObjectWithTag("Player").transform; // Encontrar o jogador
+
+        // Inicialize o SpriteRenderer
+        originalcolor = spriteRenderer.material.color;
     }
 
     void Update()
@@ -129,7 +133,23 @@ public class jaquatirica : MonoBehaviour
         {
             Die();
         }
+        StopCoroutine(BlinkRed());
+        StartCoroutine(BlinkRed());
     }
+    IEnumerator BlinkRed()
+    {
+       
+        float blinkDuration = 0.1f; // Duração de cada "piscar"
+
+        for (int i = 0; i < 5; i++) // Piscar 5 vezes
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(blinkDuration);
+            spriteRenderer.color = originalcolor;
+            yield return new WaitForSeconds(blinkDuration);
+        }
+    }
+
 
     void Die()
     {

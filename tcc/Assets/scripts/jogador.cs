@@ -36,7 +36,8 @@ public class jogador : MonoBehaviour
     public GameObject item;
     public GameObject item2;
     public bool itempegado2 = false;
-    
+    private SpriteRenderer spriteRenderer;
+
 
     private float vertical;
     private float velociadeescada = 8f;
@@ -70,6 +71,7 @@ public class jogador : MonoBehaviour
     public bool pulando;
     private bool isAttacking = false;
     public AudioSource itemPickupSound;
+
 
 
 
@@ -109,6 +111,8 @@ public class jogador : MonoBehaviour
         {
             Debug.LogWarning("Jump sound is not assigned.");
         }
+        // Inicialize o SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -402,10 +406,28 @@ public class jogador : MonoBehaviour
         currentHealth -= damageAmount;
         UpdateHealthbar();
         damagesound.Play();
+        
 
         if (currentHealth <= 0)
         {
             Die();
+        }
+
+        // Inicie a Coroutine para piscar em vermelho
+        StartCoroutine(BlinkRed());
+       
+    }
+    IEnumerator BlinkRed()
+    {
+        Color originalColor = spriteRenderer.color;
+        float blinkDuration = 0.1f; // Duração de cada "piscar"
+
+        for (int i = 0; i < 5; i++) // Piscar 5 vezes
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(blinkDuration);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(blinkDuration);
         }
     }
 
@@ -444,10 +466,12 @@ public class jogador : MonoBehaviour
                 Die();
             }
         }
+        
         if (other.gameObject.CompareTag("chaofalso"))
         {
             isGrounded = true;
         }
+
     }
      
 
@@ -525,7 +549,7 @@ public class jogador : MonoBehaviour
            
         }
     }
-
+    
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Alcapao"))
@@ -539,6 +563,12 @@ public class jogador : MonoBehaviour
             else if (!chavePegada)
             {
                 StartCoroutine(ShowAviso("Você precisa da chave para abrir o alçapão!"));
+            }
+            isGrounded = true;
+            if (ativarMortePorChao)
+            {
+                Die()
+;
             }
         }
         

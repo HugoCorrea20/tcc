@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class inimigo : MonoBehaviour
@@ -25,6 +26,8 @@ public class inimigo : MonoBehaviour
     private Vector3 heatltbarScale; //tamanho da barra
     private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
     public AudioSource tirosom;
+    private SpriteRenderer spriteRenderer;
+    Color originalcolor;
 
     void Start()
     {
@@ -33,6 +36,9 @@ public class inimigo : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); // Encontrar o jogador pelo tag
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
+        // Inicialize o SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalcolor = spriteRenderer.material.color;
 
     }
     void UpdateHealthbar()
@@ -119,6 +125,21 @@ public class inimigo : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+        StopCoroutine(BlinkRed());
+        StartCoroutine(BlinkRed());
+    }
+    IEnumerator BlinkRed()
+    {
+        
+        float blinkDuration = 0.1f; // Duração de cada "piscar"
+
+        for (int i = 0; i < 5; i++) // Piscar 5 vezes
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(blinkDuration);
+            spriteRenderer.color = originalcolor;
+            yield return new WaitForSeconds(blinkDuration);
         }
     }
 

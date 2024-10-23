@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI; // Adicione esta linha para trabalhar com UI
@@ -24,7 +25,7 @@ public class MovimentoNavio : MonoBehaviour
 
     private Vector3 heatltbarScale; //tamanho da barra
     private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
-
+    private SpriteRenderer spriteRenderer;
     void Start()
     {
         tempoUltimoTiro = Time.time;
@@ -33,6 +34,8 @@ public class MovimentoNavio : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
         mensagemNavioInimigo.SetActive(false); // Inicialmente, a mensagem está desativada
         mensagemIlhaFinal.SetActive(false); // Inicialmente, a mensagem está desativada
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
     }
 
     void UpdateHealthbar()
@@ -94,8 +97,21 @@ public class MovimentoNavio : MonoBehaviour
         {
             Die();
         }
+        StartCoroutine(BlinkRed());
     }
+    IEnumerator BlinkRed()
+    {
+        Color originalColor = spriteRenderer.color;
+        float blinkDuration = 0.1f; // Duração de cada "piscar"
 
+        for (int i = 0; i < 5; i++) // Piscar 5 vezes
+        {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(blinkDuration);
+            spriteRenderer.color = originalColor;
+            yield return new WaitForSeconds(blinkDuration);
+        }
+    }
     void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

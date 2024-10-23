@@ -1419,6 +1419,7 @@ MonoBehaviour:
   limiteDireito: 28
   danorecibido: 10
   damageInterval: 5
+  spriteRenderer: {fileID: 2034020325}
   heatlhbar: {fileID: 955873623}
   heatltbarobject: {fileID: 831601349}
   alcanceDetecao: 5

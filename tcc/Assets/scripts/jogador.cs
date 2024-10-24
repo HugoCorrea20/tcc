@@ -71,6 +71,7 @@ public class jogador : MonoBehaviour
     public bool pulando;
     private bool isAttacking = false;
     public AudioSource itemPickupSound;
+    Color originalcolor;
 
 
 
@@ -414,19 +415,20 @@ public class jogador : MonoBehaviour
         }
 
         // Inicie a Coroutine para piscar em vermelho
+        StopCoroutine(BlinkRed());
         StartCoroutine(BlinkRed());
-       
+
     }
     IEnumerator BlinkRed()
     {
-        Color originalColor = spriteRenderer.color;
+       
         float blinkDuration = 0.1f; // Duração de cada "piscar"
 
         for (int i = 0; i < 5; i++) // Piscar 5 vezes
         {
             spriteRenderer.color = Color.red;
             yield return new WaitForSeconds(blinkDuration);
-            spriteRenderer.color = originalColor;
+            spriteRenderer.color = originalcolor;
             yield return new WaitForSeconds(blinkDuration);
         }
     }

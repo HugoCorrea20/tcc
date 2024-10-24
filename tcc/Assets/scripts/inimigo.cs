@@ -21,12 +21,12 @@ public class inimigo : MonoBehaviour
     private Transform currentFirePoint; // Ponto de origem atual do tiro
     private bool isAlert = false; // Verifica se o inimigo está alerta
     public Transform heatlhbar; //barra verde
-    public GameObject heatltbarobject ; // objeto pai das barras 
-
+    public GameObject heatltbarobject; // objeto pai das barras
     private Vector3 heatltbarScale; //tamanho da barra
-    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
+    private float heathpercent; // percetual de vida para o calculo do tamanho da barra 
     public AudioSource tirosom;
     private SpriteRenderer spriteRenderer;
+    private Animator animator; // Adiciona um campo para o Animator
     Color originalcolor;
 
     void Start()
@@ -36,11 +36,11 @@ public class inimigo : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); // Encontrar o jogador pelo tag
         heatltbarScale = heatlhbar.localScale;
         heathpercent = heatltbarScale.x / currentHealth;
-        // Inicialize o SpriteRenderer
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalcolor = spriteRenderer.material.color;
-
+        animator = GetComponent<Animator>(); // Inicialize o Animator
     }
+
     void UpdateHealthbar()
     {
         heatltbarScale.x = heathpercent * currentHealth;
@@ -53,38 +53,35 @@ public class inimigo : MonoBehaviour
         {
             // Move o inimigo na direção atual
             transform.Translate(Vector2.right * direcao * velocidade * Time.deltaTime);
+            animator.SetBool("movendo", true); // Ativa a animação de movimento
 
             // Verifica se o inimigo atingiu um dos limites
             if (transform.position.x <= limiteEsquerdo)
             {
                 direcao = 1; // Altera a direção para a direita
-                             // Define o flip para a direita
-                transform.localScale = new Vector3(1, 1, 1);
+                transform.localScale = new Vector3(1, 1, 1); // Define o flip para a direita
             }
             else if (transform.position.x >= limiteDireito)
             {
                 direcao = -1; // Altera a direção para a esquerda
-                              // Define o flip para a esquerda
-                transform.localScale = new Vector3(-1, 1, 1);
+                transform.localScale = new Vector3(-1, 1, 1); // Define o flip para a esquerda
             }
+        }
+        else
+        {
+            animator.SetBool("movendo", false); // Desativa a animação de movimento
         }
     }
 
-
     void Shoot()
     {
-        // Verifica se o jogador está dentro da distância máxima de visão
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= maxDistance)
         {
-            // Marca o inimigo como alerta
             isAlert = true;
 
-            // Calcula a posição relativa do jogador em relação ao inimigo
             Vector2 directionToPlayer = player.transform.position - transform.position;
-
-            // Atualiza o flip do inimigo com base na posição relativa do jogador
-            if (directionToPlayer.x < 0) // Se o jogador estiver à esquerda do inimigo
+            if (directionToPlayer.x < 0)
             {
                 transform.localScale = new Vector3(-1, 1, 1); // Flip para a esquerda
                 currentFirePoint = firePointLeft;
@@ -95,15 +92,11 @@ public class inimigo : MonoBehaviour
                 currentFirePoint = firePointRight;
             }
             tirosom.Play();
-            // Instancia a bala
             GameObject bullet = Instantiate(bulletPrefab, currentFirePoint.position, currentFirePoint.rotation);
-
-            // Adiciona um Rigidbody2D à bala
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                // Aplica uma velocidade à bala na direção do transform atual
-                if (currentFirePoint == firePointLeft) // Se o ponto de origem for o da esquerda, inverte a direção
+                if (currentFirePoint == firePointLeft)
                 {
                     rb.velocity = -currentFirePoint.right * bulletSpeed;
                 }
@@ -114,8 +107,6 @@ public class inimigo : MonoBehaviour
             }
         }
     }
-
-
 
     public void TakeDamage(int damageAmount)
     {
@@ -129,9 +120,9 @@ public class inimigo : MonoBehaviour
         StopCoroutine(BlinkRed());
         StartCoroutine(BlinkRed());
     }
+
     IEnumerator BlinkRed()
     {
-        
         float blinkDuration = 0.1f; // Duração de cada "piscar"
 
         for (int i = 0; i < 5; i++) // Piscar 5 vezes

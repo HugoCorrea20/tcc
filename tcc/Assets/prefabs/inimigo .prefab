@@ -142,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 5216201929609695615}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.69, y: -0.54, z: 0}
+  m_LocalPosition: {x: 0.69, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -257,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 8697350261222644620}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29, y: -0.21, z: 0}
+  m_LocalPosition: {x: 0.29, y: 0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -294,7 +294,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.91, y: -2.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9789, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3586146398333991985}
@@ -342,7 +342,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5d9afe3c0babe8e45867c37fa544a580, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ecc29b1ca888704e8943ba2615e201f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 110
   currentHealth: 0
   velocidade: 2
   limiteEsquerdo: -3
@@ -383,6 +383,7 @@ MonoBehaviour:
   danorecibido: 20
   heatlhbar: {fileID: 1935076844902063373}
   heatltbarobject: {fileID: 3025407996507052258}
+  tirosom: {fileID: 0}
 --- !u!50 &4816303514635736901
 Rigidbody2D:
   serializedVersion: 4
@@ -420,7 +421,7 @@ Animator:
   m_GameObject: {fileID: 8942187728258470627}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: faf616be7b225d646a65009a3c3a0512, type: 2}
+  m_Controller: {fileID: 9100000, guid: e98ffd5161de3c74d8573d73d3e8f212, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

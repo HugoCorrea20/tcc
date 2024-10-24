@@ -4685,7 +4685,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1022513084}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03841476, y: 0.0000000037061751, z: -1.4247699e-10, w: 0.9992619}
+  m_LocalRotation: {x: 0.03841476, y: 0.0000000037061758, z: -1.4247702e-10, w: 0.9992619}
   m_LocalPosition: {x: -20.97, y: 5.04, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5539,6 +5539,174 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2787683666982791318, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
   m_PrefabInstance: {fileID: 1815058382}
   m_PrefabAsset: {fileID: 0}
+--- !u!90 &1221537435
+Avatar:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Automatic Avatar
+  m_AvatarSize: 1048
+  m_Avatar:
+    serializedVersion: 3
+    m_AvatarSkeleton:
+      data:
+        m_Node:
+        - m_ParentId: -1
+          m_AxesId: -1
+        - m_ParentId: 0
+          m_AxesId: -1
+        - m_ParentId: 0
+          m_AxesId: -1
+        - m_ParentId: 0
+          m_AxesId: -1
+        - m_ParentId: 3
+          m_AxesId: -1
+        - m_ParentId: 3
+          m_AxesId: -1
+        m_ID: 000000002a2bad50c3cb00e981177407dda2beb713ab8e45
+        m_AxesArray: []
+    m_AvatarSkeletonPose:
+      data:
+        m_X:
+        - t: {x: -1.9226, y: -2.45, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 0.9789, y: 1, z: 1}
+        - t: {x: 0.29, y: 0.28, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        - t: {x: 0.69, y: 0.08, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        - t: {x: 0, y: 0, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        - t: {x: -0.625, y: 1.239, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.5925833, y: 0.14128827, z: 1}
+        - t: {x: -0.625, y: 1.239, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.5925833, y: 0.14128827, z: 1}
+    m_DefaultPose:
+      data:
+        m_X:
+        - t: {x: -1.9226, y: -2.45, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 0.9789, y: 1, z: 1}
+        - t: {x: 0.29, y: 0.28, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        - t: {x: 0.69, y: 0.08, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        - t: {x: 0, y: 0, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        - t: {x: -0.625, y: 1.239, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.5925833, y: 0.14128827, z: 1}
+        - t: {x: -0.625, y: 1.239, z: 0}
+          q: {x: -0, y: -0, z: -0, w: 1}
+          s: {x: 0.5925833, y: 0.14128827, z: 1}
+    m_SkeletonNameIDArray: 000000002a2bad50c3cb00e98117740721ee9ad08f5f61fa
+    m_Human:
+      data:
+        serializedVersion: 2
+        m_RootX:
+          t: {x: 0, y: 0, z: 0}
+          q: {x: 0, y: 0, z: 0, w: 1}
+          s: {x: 1, y: 1, z: 1}
+        m_Skeleton:
+          data:
+            m_Node: []
+            m_ID: 
+            m_AxesArray: []
+        m_SkeletonPose:
+          data:
+            m_X: []
+        m_LeftHand:
+          data:
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_RightHand:
+          data:
+            m_HandBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneIndex: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        m_HumanBoneMass:
+        - 0.14545456
+        - 0.12121213
+        - 0.12121213
+        - 0.048484854
+        - 0.048484854
+        - 0.009696971
+        - 0.009696971
+        - 0.030303033
+        - 0.14545456
+        - 0.14545456
+        - 0.012121214
+        - 0.048484854
+        - 0.006060607
+        - 0.006060607
+        - 0.024242427
+        - 0.024242427
+        - 0.01818182
+        - 0.01818182
+        - 0.006060607
+        - 0.006060607
+        - 0.0024242427
+        - 0.0024242427
+        - 0
+        - 0
+        - 0
+        m_Scale: 1
+        m_ArmTwist: 0.5
+        m_ForeArmTwist: 0.5
+        m_UpperLegTwist: 0.5
+        m_LegTwist: 0.5
+        m_ArmStretch: 0.05
+        m_LegStretch: 0.05
+        m_FeetSpacing: 0
+        m_HasLeftHand: 0
+        m_HasRightHand: 0
+        m_HasTDoF: 0
+    m_HumanSkeletonIndexArray: 
+    m_HumanSkeletonReverseIndexArray: 
+    m_RootMotionBoneIndex: -1
+    m_RootMotionBoneX:
+      t: {x: 0, y: 0, z: 0}
+      q: {x: 0, y: 0, z: 0, w: 1}
+      s: {x: 1, y: 1, z: 1}
+    m_RootMotionSkeleton:
+      data:
+        m_Node: []
+        m_ID: 
+        m_AxesArray: []
+    m_RootMotionSkeletonPose:
+      data:
+        m_X: []
+    m_RootMotionSkeletonIndexArray: 
+  m_TOS:
+    125048705: heathbar
+    3909143491: spawnesquerda
+    1166977811: heathbar/red
+    0: 
+    1353526058: spawndireita
+    3082724061: heathbar/green
+  m_HumanDescription:
+    serializedVersion: 3
+    m_Human: []
+    m_Skeleton: []
+    m_ArmTwist: 0.5
+    m_ForeArmTwist: 0.5
+    m_UpperLegTwist: 0.5
+    m_LegTwist: 0.5
+    m_ArmStretch: 0.05
+    m_LegStretch: 0.05
+    m_FeetSpacing: 0
+    m_GlobalScale: 1
+    m_RootMotionBoneName: 
+    m_HasTranslationDoF: 0
+    m_HasExtraRoot: 0
+    m_SkeletonHasParents: 1
 --- !u!4 &1238416507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1935076844902063373, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
@@ -5895,7 +6063,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325579780}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03841476, y: 0.0000000037061751, z: -1.4247699e-10, w: 0.9992619}
+  m_LocalRotation: {x: 0.03841476, y: 0.0000000037061758, z: -1.4247702e-10, w: 0.9992619}
   m_LocalPosition: {x: -20.97, y: 5.04, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6333,6 +6501,7 @@ GameObject:
   - component: {fileID: 1364603561}
   - component: {fileID: 1364603559}
   - component: {fileID: 1364603564}
+  - component: {fileID: 1364603565}
   m_Layer: 0
   m_Name: inimigo  (2)
   m_TagString: Inimigo
@@ -6552,6 +6721,27 @@ PolygonCollider2D:
       - {x: -0.23114777, y: -0.33872843}
       - {x: -0.23951975, y: -0.13100034}
   m_UseDelaunayMesh: 0
+--- !u!95 &1364603565
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364603558}
+  m_Enabled: 1
+  m_Avatar: {fileID: 1221537435}
+  m_Controller: {fileID: 9100000, guid: e98ffd5161de3c74d8573d73d3e8f212, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1397499336
 GameObject:
   m_ObjectHideFlags: 0
@@ -10741,30 +10931,10 @@ PrefabInstance:
       propertyPath: tirosom
       value: 
       objectReference: {fileID: 818632420}
-    - target: {fileID: 795609667991148914, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
-      propertyPath: maxHealth
-      value: 110
-      objectReference: {fileID: 0}
-    - target: {fileID: 795609667991148914, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
-      propertyPath: danorecibido
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1935076844902063373, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5925833
-      objectReference: {fileID: 0}
-    - target: {fileID: 2787683666982791318, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 3586146398333991985, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 5244502356911882685, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.9789
-      objectReference: {fileID: 0}
+    - target: {fileID: 4529780765647160634, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 1221537435}
     - target: {fileID: 5244502356911882685, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9226
@@ -10804,10 +10974,6 @@ PrefabInstance:
     - target: {fileID: 5244502356911882685, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6017159726158253437, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8942187728258470627, guid: 8dcb22526a141c14abc7a17b135d4fae, type: 3}
       propertyPath: m_Name

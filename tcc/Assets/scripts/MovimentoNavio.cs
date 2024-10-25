@@ -26,7 +26,7 @@ public class MovimentoNavio : MonoBehaviour
     private Vector3 heatltbarScale; //tamanho da barra
     private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
     private SpriteRenderer spriteRenderer;
-    Color originalcolor;
+  //  Color originalcolor;
     void Start()
     {
         tempoUltimoTiro = Time.time;
@@ -35,7 +35,7 @@ public class MovimentoNavio : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
         mensagemNavioInimigo.SetActive(false); // Inicialmente, a mensagem está desativada
         mensagemIlhaFinal.SetActive(false); // Inicialmente, a mensagem está desativada
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -98,9 +98,10 @@ public class MovimentoNavio : MonoBehaviour
         {
             Die();
         }
-        StopCoroutine(BlinkRed());
-        StartCoroutine(BlinkRed());
+        //StopCoroutine(BlinkRed());
+        //StartCoroutine(BlinkRed());
     }
+    /*
     IEnumerator BlinkRed()
     {
       
@@ -114,6 +115,7 @@ public class MovimentoNavio : MonoBehaviour
             yield return new WaitForSeconds(blinkDuration);
         }
     }
+    */
     void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

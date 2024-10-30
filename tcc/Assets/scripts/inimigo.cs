@@ -19,7 +19,7 @@ public class inimigo : MonoBehaviour
     private int direcao = 1; // 1 para direita, -1 para esquerda
     private GameObject player; // Referência ao jogador
     private Transform currentFirePoint; // Ponto de origem atual do tiro
-    private bool isAlert = false; // Verifica se o inimigo está alerta
+    public bool isAlert = false; // Verifica se o inimigo está alerta
     public Transform heatlhbar; //barra verde
     public GameObject heatltbarobject; // objeto pai das barras
     private Vector3 heatltbarScale; //tamanho da barra
@@ -70,11 +70,13 @@ public class inimigo : MonoBehaviour
         else
         {
             animator.SetBool("movendo", false); // Desativa a animação de movimento
+            
         }
     }
 
     void Shoot()
     {
+        
         float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= maxDistance)
         {
@@ -91,6 +93,7 @@ public class inimigo : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1); // Sem flip (direita)
                 currentFirePoint = firePointRight;
             }
+            animator.SetTrigger("tiro");
             tirosom.Play();
             GameObject bullet = Instantiate(bulletPrefab, currentFirePoint.position, currentFirePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -105,6 +108,11 @@ public class inimigo : MonoBehaviour
                     rb.velocity = currentFirePoint.right * bulletSpeed;
                 }
             }
+        }
+        else
+        {
+            isAlert = false;
+            animator.SetBool("movendo", true);
         }
     }
 

@@ -71,7 +71,7 @@ public class jogador : MonoBehaviour
     public bool pulando;
     private bool isAttacking = false;
     public AudioSource itemPickupSound;
-   // Color originalcolor;
+     Color originalcolor;
 
 
 
@@ -113,7 +113,8 @@ public class jogador : MonoBehaviour
             Debug.LogWarning("Jump sound is not assigned.");
         }
         // Inicialize o SpriteRenderer
-        //spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalcolor = spriteRenderer.material.color;
 
     }
 
@@ -415,11 +416,11 @@ public class jogador : MonoBehaviour
         }
 
         // Inicie a Coroutine para piscar em vermelho
-        //StopCoroutine(BlinkRed());
-        //StartCoroutine(BlinkRed());
+        StopCoroutine(BlinkRed());
+        StartCoroutine(BlinkRed());
 
     }
-    /*
+    
     IEnumerator BlinkRed()
     {
        
@@ -433,7 +434,7 @@ public class jogador : MonoBehaviour
             yield return new WaitForSeconds(blinkDuration);
         }
     }
-    */
+    
     void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

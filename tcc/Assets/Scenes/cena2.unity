@@ -10898,6 +10898,18 @@ PrefabInstance:
       propertyPath: itemPickupSound
       value: 
       objectReference: {fileID: 1341554066}
+    - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: originalcolor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: originalcolor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829050699758807886, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
+      propertyPath: originalcolor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6206690345221272191, guid: a968f5a422b74bf448ceb77ff19cb010, type: 3}
       propertyPath: m_Name
       value: jogador

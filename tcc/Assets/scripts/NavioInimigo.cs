@@ -28,6 +28,7 @@ public class NavioInimigo : MonoBehaviour
     private Vector3 heatltbarScale; //tamanho da barra
     private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
     private SpriteRenderer spriteRenderer;
+    Color originalcolor;
     void Start()
     {
         currentHealth = maxHealth;
@@ -37,7 +38,7 @@ public class NavioInimigo : MonoBehaviour
         heathpercent = heatltbarScale.x / currentHealth;
         // Inicialize o SpriteRenderer
         spriteRenderer = GetComponent<SpriteRenderer>();
-
+        originalcolor = spriteRenderer.material.color;
     }
 
     void UpdateHealthbar()
@@ -142,18 +143,19 @@ public class NavioInimigo : MonoBehaviour
         }
 
         // Inicie a Coroutine para piscar em vermelho
+        StopCoroutine(BlinkRed());
         StartCoroutine(BlinkRed());
     }
     IEnumerator BlinkRed()
     {
-        Color originalColor = spriteRenderer.color;
+        
         float blinkDuration = 0.1f; // Duração de cada "piscar"
 
         for (int i = 0; i < 5; i++) // Piscar 5 vezes
         {
             spriteRenderer.color = Color.red;
             yield return new WaitForSeconds(blinkDuration);
-            spriteRenderer.color = originalColor;
+            spriteRenderer.color = originalcolor;
             yield return new WaitForSeconds(blinkDuration);
         }
     }

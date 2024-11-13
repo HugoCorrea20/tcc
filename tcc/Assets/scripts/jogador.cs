@@ -6,26 +6,29 @@ using UnityEngine.UI;
 
 public class jogador : MonoBehaviour
 {
+    [Header("configuração vida")]
     public int maxHealth = 100; // Vida máxima do jogador
     public int currentHealth; // Vida atual do jogador
+    public Transform heatlhbar; //barra verde
+    public GameObject heatltbarobject; // objeto pai das barras 
+    public int danorecibido = 10;
+    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
+    [Header("balaceamento")]
     public float speed = 5f;
     public float jumpForce = 10f;
-    private Rigidbody2D rb;
-
-    private bool isGrounded;
-    private float lastDirection = 1f;
     public float attackRange = 1.5f; // Ajuste a distância de ataque conforme necessário
     public float pickupRange = 1.5f; // Ajuste a distância de pegar o item conforme necessário
-    public bool itemPegado = false;
+
+
     public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
     public GameObject fimObjeto; // Objeto do fim do jogo
     public TextMeshProUGUI avisoText; // Referência ao objeto de texto para exibir o aviso
-    public int danorecibido = 10;
-    public Transform heatlhbar; //barra verde
-    public GameObject heatltbarobject; // objeto pai das barras 
+    public bool itemPegado = false;
+    private Rigidbody2D rb;
+    private bool isGrounded;
     public GameObject pá;
     private Vector3 heatltbarScale; //tamanho da barra
-    private float heathpercent;   // percetual de vida para o calculo  do tamanho da barra 
+    private float lastDirection = 1f;
     public string proximaCena; // Nome da próxima cena a ser carregada
     public float tempoDeTransicao = 1f; // Tempo da transição
     public Image imagemTransicao; // Referência para a imagem de transição
@@ -132,7 +135,7 @@ public class jogador : MonoBehaviour
             if (Input.GetMouseButtonDown(0)) // Botão esquerdo do mouse para ataque de perto
             {
                 Attack();
-                espadasom.Play();
+               
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -363,45 +366,47 @@ public class jogador : MonoBehaviour
 
     void Attack()
     {
-        if (!PauseMenu.isPaused)
+        if (!PauseMenu.isPaused && !isAttacking)
         {
-            isAttacking = true; // Jogador está atacando
-            animator.SetBool("ataque", true);
-            Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
-            foreach (Collider2D collider in colliders)
+            StartCoroutine(PerformAttack());
+        }
+    }
+    private IEnumerator PerformAttack()
+    {
+        espadasom.Play();
+        isAttacking = true; // Jogador está atacando
+        animator.SetBool("ataque", true);
+        Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
+
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Inimigo"))
             {
-                if (collider.CompareTag("Inimigo"))
-                {
-                    collider.GetComponent<inimigo>().TakeDamage(10);
-                }
-            }
-            foreach (Collider2D collider in colliders)
-            {
-                if (collider.CompareTag("jacare"))
-                {
-                    collider.GetComponent<jacare>().TakeDamage(10);
-                }
-            }
-            foreach (Collider2D collider in colliders)
-            {
-                if (collider.CompareTag("jaquatirica"))
-                {
-                    collider.GetComponent<jaquatirica>().TakeDamage(10);
-                }
+                collider.GetComponent<inimigo>().TakeDamage(10);
             }
         }
-        StartCoroutine(DesativarObjetoDeAtaque());
-    }
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("jacare"))
+            {
+                collider.GetComponent<jacare>().TakeDamage(10);
+            }
+        }
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("jaquatirica"))
+            {
+                collider.GetComponent<jaquatirica>().TakeDamage(10);
+            }
+        }
 
+        yield return new WaitForSeconds(1); // Espera por 3 segundos
 
-    IEnumerator DesativarObjetoDeAtaque()
-    {
-        yield return new WaitForSeconds(0.1f);
-        isAttacking = false; // Jogador parou de atacar
         animator.SetBool("ataque", false);
-        UpdateAnimations(); // Atualiza as animações após o ataque
+        isAttacking = false; // Jogador pode atacar novamente
     }
+
 
     public void TakeDamage(int damageAmount)
     {

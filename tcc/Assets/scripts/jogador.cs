@@ -376,6 +376,7 @@ public class jogador : MonoBehaviour
         espadasom.Play();
         isAttacking = true; // Jogador está atacando
         animator.SetBool("ataque", true);
+        animator.SetBool("ataque", false);
         Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
 
@@ -403,7 +404,7 @@ public class jogador : MonoBehaviour
 
         yield return new WaitForSeconds(1); // Espera por 3 segundos
 
-        animator.SetBool("ataque", false);
+       
         isAttacking = false; // Jogador pode atacar novamente
     }
 

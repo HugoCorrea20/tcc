@@ -4908,6 +4908,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3676168460631691695, guid: 4cc668200ab38ac459124715c4443723, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1296607764}
+    - targetCorrespondingSourceObject: {fileID: 3676168460631691695, guid: 4cc668200ab38ac459124715c4443723, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1296607765}
   m_SourcePrefab: {fileID: 100100000, guid: 4cc668200ab38ac459124715c4443723, type: 3}
 --- !u!1 &808210630
 GameObject:
@@ -7689,7 +7692,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.5, y: 1.84}
+    oldSize: {x: 4.24, y: 2.24}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7834,6 +7837,27 @@ PolygonCollider2D:
       - {x: -3.4099998, y: 0.44}
       - {x: -3.4199998, y: 0.45}
   m_UseDelaunayMesh: 0
+--- !u!95 &1296607765
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296607759}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c445afa85ec0534b9261eecc4221018, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1325579780
 GameObject:
   m_ObjectHideFlags: 0

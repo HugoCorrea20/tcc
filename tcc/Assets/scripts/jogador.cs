@@ -18,6 +18,12 @@ public class jogador : MonoBehaviour
     public float jumpForce = 10f;
     public float attackRange = 1.5f; // Ajuste a distância de ataque conforme necessário
     public float pickupRange = 1.5f; // Ajuste a distância de pegar o item conforme necessário
+    public float tempoataque = 1.5f;
+    public float attackCooldown = 0.5f; // Tempo de espera entre os ataques
+    [Header("Ataque")]
+    public float rangedAttackRange = 5f; // Distância máxima do ataque à distância
+    public GameObject projectilePrefab; // Prefab do projétil para o ataque à distância
+    public Transform firePoint; // Ponto de origem do projétil
 
 
     public GameObject currentItem; // Variável para armazenar o item atualmente disponível para ser pego
@@ -75,7 +81,7 @@ public class jogador : MonoBehaviour
     private bool isAttacking = false;
     public AudioSource itemPickupSound;
      Color originalcolor;
-
+    public GameObject textoalçapão;
 
 
 
@@ -373,10 +379,12 @@ public class jogador : MonoBehaviour
     }
     private IEnumerator PerformAttack()
     {
-        espadasom.Play();
         isAttacking = true; // Jogador está atacando
-        animator.SetBool("ataque", true);
-        
+
+        animator.SetBool("ataque", true); // Inicia animação de ataque
+
+        // Executa a lógica do ataque (verifica colisões, aplica dano, etc.)
+
         Vector2 attackPosition = transform.position + new Vector3(lastDirection * attackRange, 0f, 0f);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPosition, 0.5f);
 
@@ -386,25 +394,27 @@ public class jogador : MonoBehaviour
             {
                 collider.GetComponent<inimigo>().TakeDamage(10);
             }
-        }
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.CompareTag("jacare"))
+            if(collider.CompareTag("jacare"))
             {
                 collider.GetComponent<jacare>().TakeDamage(10);
             }
-        }
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.CompareTag("jaquatirica"))
+            if(collider.CompareTag("jaquatirica"))
             {
                 collider.GetComponent<jaquatirica>().TakeDamage(10);
             }
+
         }
 
-        yield return new WaitForSeconds(1); // Espera por 3 segundos
-        animator.SetBool("ataque", false);
-        isAttacking = false; // Jogador pode atacar novamente
+        // Aguarda a animação do ataque
+        yield return new WaitForSeconds(0.5f); // Espera até 0.5 segundos para finalizar o ataque (ajuste conforme necessário)
+
+        animator.SetBool("ataque", false); // Finaliza animação de ataque
+
+        // Aguarda o cooldown de 1 segundo
+        yield return new WaitForSeconds(attackCooldown);
+
+        isAttacking = false; // Jogador pode atacar novamente após o cooldown
+
     }
 
 
@@ -571,6 +581,7 @@ public class jogador : MonoBehaviour
             }
             else if (!chavePegada)
             {
+                textoalçapão.SetActive(true);
                 StartCoroutine(ShowAviso("Você precisa da chave para abrir o alçapão!"));
             }
             isGrounded = true;
@@ -630,9 +641,10 @@ public class jogador : MonoBehaviour
     IEnumerator ShowAviso(string mensagem)
     {
         avisoText.text = mensagem;
-        avisoText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
+        //avisoText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3f);
         avisoText.gameObject.SetActive(false);
+        textoalçapão.SetActive(false);
     }
 
 }

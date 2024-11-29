@@ -380,7 +380,7 @@ public class jogador : MonoBehaviour
     private IEnumerator PerformAttack()
     {
         isAttacking = true; // Jogador está atacando
-
+        espadasom.Play();
         animator.SetBool("ataque", true); // Inicia animação de ataque
 
         // Executa a lógica do ataque (verifica colisões, aplica dano, etc.)
